@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>01 · Blueprint</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/deck.css">
+<style>
+:root{--bp:#0c3a63;--ln:#e6f0fa;--dim:rgba(230,240,250,.6);--faint:rgba(230,240,250,.16);--y:#ffd166;--c:#7fdbff;--mono:'JetBrains Mono',monospace}
+.slide{background-color:var(--bp);color:var(--ln);font-family:'Space Grotesk',sans-serif;
+  background-image:linear-gradient(var(--faint) 1px,transparent 1px),linear-gradient(90deg,var(--faint) 1px,transparent 1px),
+  linear-gradient(rgba(230,240,250,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(230,240,250,.055) 1px,transparent 1px);
+  background-size:80px 80px,80px 80px,16px 16px,16px 16px;background-position:-1px -1px}
+.frame{position:absolute;inset:24px;border:2px solid var(--ln);pointer-events:none}
+.lbl{font:500 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--y)}
+.hd{position:absolute;left:76px;top:58px}
+.hd h2{font-size:40px;line-height:1.1;font-weight:700;margin-top:12px;max-width:940px;letter-spacing:-.01em}
+.bd{position:absolute;left:76px;right:76px;top:178px;bottom:116px}
+.tb{position:absolute;right:24px;bottom:24px;display:grid;grid-template-columns:250px 90px 84px;border-left:2px solid var(--ln);border-top:2px solid var(--ln);background:var(--bp);font:500 11px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.tb>div{padding:6px 10px;border-right:1px solid var(--faint);border-bottom:1px solid var(--faint)}
+.tb i{display:block;font-style:normal;color:var(--y);font-size:9px;letter-spacing:.14em;margin-bottom:2px}
+.tb .w{grid-column:1/-1}
+svg text{font-family:var(--mono)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes flow{to{stroke-dashoffset:-28}}
+
+/* 1 cover */
+.cv{position:absolute;left:76px;top:112px;width:560px}
+.cv h1{font-size:86px;line-height:.98;font-weight:700;letter-spacing:-.02em;margin:18px 0 22px}
+.cv h1 em{font-style:normal;color:var(--y)}
+.cv p{font-size:22px;color:var(--dim)}
+.spec{margin-top:36px;font:500 14px var(--mono);letter-spacing:.05em;width:440px}
+.spec div{display:flex;gap:14px;align-items:baseline;padding:9px 0;border-top:1px solid var(--faint)}
+.spec i{flex:1;border-bottom:1px dotted var(--dim)}
+.spec b{font-weight:600;text-transform:uppercase}
+.spec span:first-child{color:var(--y)}
+.imp{position:absolute;right:-20px;top:20px;width:600px;height:600px}
+.imp *{fill:none;stroke:var(--ln);stroke-width:2}
+.imp .thin{stroke-width:1;opacity:.65}
+.imp .cl{stroke-width:1;stroke-dasharray:26 6 4 6;opacity:.45}
+.imp .vanes{animation:spin 50s linear infinite}
+.imp .vanes path{stroke:var(--y);stroke-width:4}
+.imp text{fill:var(--y);stroke:none;font-size:13px;letter-spacing:.1em}
+
+/* 2 system */
+.pid{position:absolute;inset:0;width:1128px;height:426px;overflow:visible}
+.pid *{fill:none;stroke:var(--ln);stroke-width:2.5}
+.pid text{fill:var(--ln);stroke:none;font-size:13px;letter-spacing:.08em}
+.pid .tag text{font-size:12px;font-weight:700}
+.pid g[data-at]{opacity:.22;transition:opacity .45s}
+.pid g.in{opacity:1}
+.pid g.now path,.pid g.now circle,.pid g.now rect{stroke:var(--y)}
+.pid .flow{stroke:var(--y);stroke-dasharray:8 6;stroke-width:3;opacity:0}
+.pid g.in .flow{opacity:1;animation:flow 1s linear infinite}
+.pid .big{font:700 46px 'Space Grotesk';fill:var(--ln);letter-spacing:0}
+.pc{position:absolute;left:0;width:320px;height:100px;display:flex;gap:14px;align-items:center;padding:12px 16px;border:1.5px solid var(--ln);background:var(--bp);opacity:.3;transition:opacity .45s,border-color .45s}
+.pc.in{opacity:1}
+.pc.now{border-color:var(--y);box-shadow:0 0 0 4px rgba(255,209,102,.15)}
+.pc .ic{width:46px;height:46px;flex:none;--ia:rgba(255,209,102,.35)}
+.pc b{display:block;font-size:17px;margin:4px 0 3px}
+.pc p{font-size:13.5px;color:var(--dim);line-height:1.3}
+
+/* 3 team parts list */
+.det{position:absolute;left:0;top:0;width:420px;height:426px}
+.det svg{position:absolute;inset:0}
+.det .bi{position:absolute;left:105px;top:95px;width:210px;height:210px;opacity:0;transform:scale(.88);transition:opacity .4s,transform .4s}
+.det .bi.now{opacity:1;transform:none}
+.det .bi .ic{width:100%;height:100%;--isw:1.5;--ia:url(#bpH);color:var(--ln)}
+.parts{position:absolute;left:480px;right:0;top:0}
+.ph{display:grid;grid-template-columns:60px 1fr;padding:0 16px 10px;font:500 11px var(--mono);letter-spacing:.14em;color:var(--y);border-bottom:2px solid var(--ln)}
+.pr{display:grid;grid-template-columns:60px 1fr;padding:13px 16px;border-bottom:1px solid var(--faint);border-left:3px solid transparent;cursor:pointer;transition:background .3s}
+.pr span{font:500 14px var(--mono);color:var(--dim);padding-top:3px}
+.pr b{font-size:19px;font-weight:500;color:var(--dim)}
+.pr p{grid-column:2;display:none;font-size:16px;color:var(--ln);margin-top:6px}
+.pr.now{background:rgba(255,209,102,.1);border-left-color:var(--y)}
+.pr.now b{color:var(--ln);font-weight:700}
+.pr.now span{color:var(--y)}
+.pr.now p{display:block}
+
+/* 4 segments impeller */
+.ip{position:absolute;inset:0;width:1128px;height:426px;overflow:visible}
+.ip *{fill:none;stroke:var(--ln)}
+.ip .case{stroke-width:1.5;stroke-dasharray:4 7;opacity:.6}
+.ip .vane{stroke-width:3;opacity:.45;transition:all .4s}
+.ip .vane.now{stroke:var(--y);stroke-width:6;opacity:1}
+.ip .ld{stroke-width:1;opacity:.35}
+.ip .ld.now{stroke:var(--y);opacity:1}
+.hub{position:absolute;left:509px;top:158px;width:110px;height:110px;border-radius:50%;border:2px solid var(--ln);background:var(--bp)}
+.hub .hi{position:absolute;inset:22px;opacity:0;transition:opacity .35s}
+.hub .hi.now{opacity:1}
+.hub .ic{width:100%;height:100%;color:var(--y);--ia:rgba(255,209,102,.3)}
+.vl{position:absolute;width:330px;transform:translateY(-50%);cursor:pointer}
+.vl.l{text-align:right}
+.vl span{font:500 12px var(--mono);color:var(--y);letter-spacing:.12em}
+.vl b{display:block;font-size:18px;font-weight:500;color:var(--dim);margin-top:3px;transition:all .3s}
+.vl p{display:none;font-size:15px;color:var(--ln);margin-top:5px}
+.vl.now b{color:var(--ln);font-weight:700;font-size:21px}
+.vl.now p{display:block}
+
+/* 5 channels manifold */
+.mf{position:absolute;inset:0;width:1128px;height:300px;overflow:visible}
+.mf *{fill:none;stroke:var(--ln);stroke-width:2.5}
+.mf .po{stroke-width:22}
+.mf .pi{stroke:var(--bp);stroke-width:16}
+.mf .bo{stroke-width:14}
+.mf .bi2{stroke:var(--bp);stroke-width:9}
+.mf .v{fill:var(--bp);stroke-width:2.5}
+.mf g.now .v{fill:var(--y);stroke:var(--y)}
+.mf .fl{stroke:var(--y);stroke-width:4;stroke-dasharray:6 8;opacity:0}
+.mf g.now .fl{opacity:1;animation:flow .8s linear infinite}
+.mf text{fill:var(--ln);stroke:none;font-size:12px}
+.oc{position:absolute;top:208px;width:140px;text-align:center;opacity:.45;cursor:pointer;transition:opacity .3s}
+.oc .ic{width:44px;height:44px;margin:0 auto 8px;--ia:rgba(255,209,102,.3)}
+.oc b{font-size:15px;font-weight:600}
+.oc.now{opacity:1}
+.oc.now .ic{color:var(--y)}
+.ot{position:absolute;left:0;right:0;top:330px;padding-left:18px;border-left:3px solid var(--y);opacity:0;transition:opacity .35s}
+.ot.now{opacity:1}
+.ot b{font-size:26px}
+.ot p{font-size:18px;color:var(--dim);margin-top:4px}
+
+/* 6 market / 7 growth */
+.mk{position:absolute;left:0;top:0;width:660px;height:420px}
+.mk .yr{font:500 13px var(--mono);letter-spacing:.12em}
+.rd{position:absolute;left:740px;right:0;top:20px;font:500 15px var(--mono)}
+.rd div{display:grid;grid-template-columns:40px 1fr 70px;padding:11px 0;border-bottom:1px solid var(--faint)}
+.rd .h{color:var(--y);font-size:11px;letter-spacing:.14em;border-bottom:2px solid var(--ln)}
+.rd .up{color:var(--y)}
+.gr{position:absolute;inset:0;width:1128px;height:426px}
+.gr text{fill:var(--ln);font-size:14px}
+.note{position:absolute;right:0;top:0;width:150px;border:1.5px dashed var(--y);padding:10px 12px;font:500 11px/1.4 var(--mono);letter-spacing:.08em;color:var(--y);text-transform:uppercase}
+
+/* 8 sign-off */
+.so{position:absolute;left:76px;top:120px}
+.so h1{font-size:96px;line-height:1;font-weight:700;letter-spacing:-.02em;margin-top:16px}
+.so p{font-size:24px;color:var(--dim);margin-top:16px}
+.stamp{position:absolute;right:120px;top:110px;transform:rotate(-9deg);border:5px solid var(--y);color:var(--y);padding:18px 30px;text-align:center;font:700 52px/1 'Space Grotesk';letter-spacing:.08em;border-radius:8px;outline:2px solid var(--y);outline-offset:6px}
+.stamp small{display:block;font:500 13px var(--mono);letter-spacing:.2em;margin-top:10px}
+.sigs{position:absolute;left:76px;right:76px;top:400px;display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+.sigs div{border-top:2px solid var(--ln);padding-top:10px;font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.sigs svg{display:block;width:100%;height:70px;margin-top:-84px;margin-bottom:14px}
+.sigs path{fill:none;stroke:var(--c);stroke-width:2.2;stroke-linecap:round}
+</style>
+</head>
+<body>
+<div id="viewport"><main class="stage" id="stage"></main></div>
+<script src="assets/content.js"></script>
+<script src="assets/icons.js"></script>
+<script src="assets/deck.js"></script>
+<script>
+(function () {
+  var Y = C.years, N = 8, S = [], esc = Deck.esc;
+  function P(r, d) { var a = d * Math.PI / 180; return [+(r * Math.cos(a)).toFixed(1), +(r * Math.sin(a)).toFixed(1)]; }
+  function tb(n, t) { return '<div class="tb"><div><i>Project</i>' + C.org + '</div><div><i>Dwg no.</i>EP-0' + n + '</div><div><i>Sheet</i>' + n + ' / ' + N + '</div><div class="w"><i>Title</i>' + t + '</div></div>'; }
+  function sl(n, t, h) { S.push('<section class="slide"><div class="frame"></div>' + h + tb(n, t) + '</section>'); }
+  function hd(l, h) { return '<div class="hd"><div class="lbl">' + l + '</div><h2>' + h + '</h2></div>'; }
+
+  Deck.defs(
+    '<marker id="bpA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#e6f0fa"/></marker>' +
+    '<marker id="bpY" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ffd166"/></marker>' +
+    '<pattern id="bpH" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="7" height="7" fill="#ffd166" fill-opacity=".14"/><path d="M0 0V7" stroke="#ffd166" stroke-width="2.4"/></pattern>');
+
+  /* 1 cover */
+  var v = ''; for (var i = 0; i < 6; i++) v += '<path d="M0 -58C55 -95 140 -122 206 -62" transform="rotate(' + i * 60 + ')"/>';
+  sl(1, 'General arrangement',
+    '<div class="cv"><div class="lbl">Drawing set · ' + Y[1] + '</div><h1>Engineering<br>a year of<br><em>growth</em></h1><p>Not the numbers. The system behind them.</p>' +
+    '<div class="spec">' + C.pillars.map(function (p, i) { return '<div><span>0' + (i + 1) + '</span><b>' + p.s + '</b><i></i><span>' + [C.team, C.segment, C.channels][i].length + ' parts</span></div>'; }).join('') + '</div></div>' +
+    '<svg class="imp" viewBox="-330 -330 660 660"><path class="cl" d="M-320 0H320M0 -320V320"/><circle r="236" class="thin"/><circle r="222"/><circle r="60"/><circle r="24" class="thin"/>' +
+    '<g class="vanes">' + v + '</g>' +
+    '<path d="M-222 286H222" marker-start="url(#bpA)" marker-end="url(#bpA)"/><path class="thin" d="M-222 230V300M222 230V300"/><text x="0" y="276" text-anchor="middle">Ø · ONE TEAM</text>' +
+    '<path class="thin" d="M150 -130L215 -250H322"/><text x="322" y="-260" text-anchor="end">VANES × 6 · SEGMENTS</text>' +
+    '<path class="thin" d="M-22 -52L-90 -250H-210"/><text x="-210" y="-260">HUB · TEAM</text>' +
+    '<path class="thin" d="M200 110L262 196H322"/><text x="322" y="186" text-anchor="end">OUTLETS × 7 · CHANNELS</text></svg>');
+
+  /* 2 system overview */
+  var tops = [8, 163, 318], mids = [58, 213, 368];
+  var lines = ['M320 58H470V213', 'M320 213H562', 'M320 368H470V213'];
+  var g = C.pillars.map(function (p, i) {
+    return '<g data-at="' + (i + 1) + '"><path d="' + lines[i] + '"/><path class="flow" d="' + lines[i] + '"/><g class="tag"><circle cx="395" cy="' + mids[i] + '" r="17" fill="#0c3a63" style="fill:#0c3a63"/><text x="395" y="' + (mids[i] + 4) + '" text-anchor="middle">' + ['TM', 'SG', 'CH'][i] + '</text></g></g>';
+  }).join('');
+  sl(2, 'System overview', hd('Sheet 02 · system overview', 'Three inputs, one pump, <span style="color:var(--y)">one result</span>') +
+    '<div class="bd"><svg class="pid" viewBox="0 0 1128 426">' + g +
+    '<g data-at="4"><circle cx="620" cy="213" r="58"/><path d="M592 176V250L672 213Z"/><path d="M620 155V70H786" marker-end="url(#bpA)"/><path class="flow" d="M620 155V70H786"/>' +
+    '<rect x="790" y="30" width="330" height="350"/><path d="M790 176q20.6-10 41.2 0t41.2 0t41.2 0t41.2 0t41.2 0t41.2 0t41.2 0t41.2 0V380H790Z" style="fill:url(#bpH)"/>' +
+    '<text x="955" y="88" text-anchor="middle" style="fill:#ffd166">OUTPUT · ' + Y[1] + '</text><text class="big" x="955" y="140" text-anchor="middle">Growth</text>' +
+    '<text x="620" y="306" text-anchor="middle">PUMP</text></g></svg>' +
+    C.pillars.map(function (p, i) { return '<div class="pc" data-at="' + (i + 1) + '" style="top:' + tops[i] + 'px">' + I(p.i) + '<div><span class="lbl">Input 0' + (i + 1) + '</span><b>' + p.n + '</b><p>' + p.l + '</p></div></div>'; }).join('') + '</div>');
+
+  /* 3 team: parts list */
+  var cross = '<svg viewBox="0 0 420 426" fill="none" stroke="#e6f0fa"><circle cx="210" cy="200" r="190" stroke-dasharray="5 8" stroke-width="1.5"/><circle cx="210" cy="200" r="150" stroke-opacity=".3"/><path d="M0 200H420M210 0V400" stroke-opacity=".3" stroke-dasharray="20 6 4 6"/><text x="210" y="420" text-anchor="middle" fill="#ffd166" stroke="none" font-size="12" letter-spacing="2">DETAIL A · SUBSYSTEM 01</text></svg>';
+  sl(3, 'Subsystem 01 · team', hd('Subsystem 01 · team-oriented focus', 'Six parts that made <span style="color:var(--y)">the team</span> work') +
+    '<div class="bd"><div class="det">' + cross + C.team.map(function (p, i) { return '<div class="bi" data-at="' + i + '">' + I(p.i) + '</div>'; }).join('') + '</div>' +
+    '<div class="parts"><div class="ph"><span>NO.</span><span>PART</span></div>' +
+    C.team.map(function (p, i) { return '<div class="pr" data-at="' + i + '" data-go="' + i + '"><span>0' + (i + 1) + '</span><b>' + p.t + '</b><p>' + p.l + '</p></div>'; }).join('') + '</div></div>');
+
+  /* 4 segments: impeller */
+  var cx = 564, cy = 213, ang = [-60, 0, 60, 120, 180, 240], vs = '', labs = '', hubs = '';
+  C.segment.forEach(function (p, i) {
+    var a = ang[i], p0 = P(58, a - 55), c1 = P(110, a - 55), c2 = P(156, a - 25), p1 = P(160, a), q = P(205, a);
+    vs += '<path class="vane" data-at="' + i + '" d="M' + (cx + p0[0]) + ' ' + (cy + p0[1]) + 'C' + (cx + c1[0]) + ' ' + (cy + c1[1]) + ' ' + (cx + c2[0]) + ' ' + (cy + c2[1]) + ' ' + (cx + p1[0]) + ' ' + (cy + p1[1]) + '"/>' +
+      '<path class="ld" data-at="' + i + '" d="M' + (cx + p1[0]) + ' ' + (cy + p1[1]) + 'L' + (cx + q[0]) + ' ' + (cy + q[1]) + '"/>';
+    var right = i < 3, x = cx + q[0], y = cy + q[1];
+    labs += '<div class="vl ' + (right ? 'r' : 'l') + '" data-at="' + i + '" data-go="' + i + '" style="top:' + y + 'px;' + (right ? 'left:' + (x + 12) : 'right:' + (1128 - x + 12)) + 'px"><span>VANE 0' + (i + 1) + '</span><b>' + p.t + '</b><p>' + p.l + '</p></div>';
+    hubs += '<div class="hi" data-at="' + i + '">' + I(p.i) + '</div>';
+  });
+  sl(4, 'Subsystem 02 · segments', hd('Subsystem 02 · product segment orientation', 'Six vanes, <span style="color:var(--y)">one direction</span>') +
+    '<div class="bd"><svg class="ip" viewBox="0 0 1128 426"><circle class="case" cx="' + cx + '" cy="' + cy + '" r="176"/>' + vs + '</svg><div class="hub">' + hubs + '</div>' + labs + '</div>');
+
+  /* 5 channels: manifold */
+  var br = '', oc = '', ot = '';
+  C.channels.forEach(function (p, i) {
+    var x = 150 + i * 152;
+    br += '<g data-at="' + i + '"><path class="bo" d="M' + x + ' 70V188"/><path class="bi2" d="M' + x + ' 66V185"/><path class="fl" d="M' + x + ' 70V186"/>' +
+      '<path class="v" d="M' + (x - 13) + ' 112H' + (x + 13) + 'L' + x + ' 128ZM' + (x - 13) + ' 144H' + (x + 13) + 'L' + x + ' 128Z"/><path d="M' + (x - 11) + ' 188H' + (x + 11) + 'L' + (x + 7) + ' 198H' + (x - 7) + 'Z"/></g>';
+    oc += '<div class="oc" data-at="' + i + '" data-go="' + i + '" style="left:' + (x - 70) + 'px">' + I(p.i) + '<b>' + p.k + '</b></div>';
+    ot += '<div class="ot" data-at="' + i + '"><b>0' + (i + 1) + ' · ' + p.t + '</b><p>' + p.l + '</p></div>';
+  });
+  sl(5, 'Subsystem 03 · channels', hd('Subsystem 03 · exploring other business channels', 'Seven outlets to <span style="color:var(--y)">new buyers</span>') +
+    '<div class="bd"><svg class="mf" viewBox="0 0 1128 300"><path class="po" d="M70 60H1110"/><path class="pi" d="M66 60H1104"/>' +
+    '<circle cx="40" cy="60" r="30" style="fill:#0c3a63"/><path d="M24 40V80L66 60Z"/><text x="40" y="112" text-anchor="middle">PUMP</text>' + br + '</svg>' + oc + ot + '</div>');
+
+  /* 6 market */
+  var mk = Deck.slope(C.market, { w: 660, h: 420, x1: 150, x2: 510, years: Y, ink: '#e6f0fa', sub: 'rgba(230,240,250,.6)', axis: '#e6f0fa', fs: 17, font: 'Space Grotesk', hi: 1,
+    color: function (d, i) { return i === 1 ? '#ffd166' : i === 0 ? '#7fdbff' : 'rgba(230,240,250,.45)'; }, width: function (d, i) { return i < 2 ? 5 : 2.5; } });
+  sl(6, 'Test report · market', hd('Test report 01 · market position', '<span style="color:var(--y)">B</span> moved from second to first') +
+    '<div class="bd"><div class="mk">' + mk + '</div><div class="rd"><div class="h"><span></span><span>READING</span><span>CHANGE</span></div>' +
+    C.market.map(function (d) { var c = d[2] - d[1]; return '<div' + (d[0] === 'B' ? ' class="up"' : '') + '><span>' + d[0] + '</span><span>' + d[1] + ' → ' + d[2] + '</span><span>' + (c > 0 ? '▲ ' + c : c < 0 ? '▼ ' + (-c) : '= 0') + '</span></div>'; }).join('') + '</div></div>');
+
+  /* 7 growth */
+  var gx = 130, gw = 760, rows = '', ticks = '';
+  [0, 5, 10, 15, 20].forEach(function (t) { var x = gx + t / 20 * gw; ticks += '<path d="M' + x + ' 28V' + (44 + 10 * 36) + '" stroke="#e6f0fa" stroke-opacity=".25" stroke-dasharray="3 5"/><text x="' + x + '" y="18" text-anchor="middle" fill="#ffd166" font-size="12">' + t + '%</text>'; });
+  C.growth.forEach(function (d, i) {
+    var y = 40 + i * 36, w = d[1] / 20 * gw;
+    rows += '<text x="0" y="' + (y + 15) + '">' + d[0] + '</text><rect x="' + gx + '" y="' + y + '" width="' + gw + '" height="20" fill="none" stroke="#e6f0fa" stroke-opacity=".25"/>' +
+      '<rect x="' + gx + '" y="' + y + '" width="' + w + '" height="20" fill="url(#bpH)" stroke="#ffd166" stroke-width="1.5"/><text x="' + (gx + w + 12) + '" y="' + (y + 15) + '" font-weight="700">+' + d[1] + '%</text>';
+  });
+  sl(7, 'Test report · output', hd('Test report 02 · output per line', 'Every line gained, <span style="color:var(--y)">5% to 20%</span>') +
+    '<div class="bd"><svg class="gr" viewBox="0 0 1128 426">' + ticks + rows + '</svg><div class="note">' + C.growthNote + ' · replace with actual figures</div></div>');
+
+  /* 8 sign-off */
+  var sq = ['M8 50c14-30 22 8 34-10s14-26 24 2 18 4 30-14 14 18 28 4', 'M6 46c20-4 18-30 34-26s-4 30 14 26 16-24 32-16 10 18 30 6', 'M10 52c8-24 30-34 26-8s14 6 22-12 20 22 30 6 16-10 26 2', 'M8 44c16 6 24-26 40-18s-6 26 12 22 20-30 34-14', 'M8 48c18-28 26 6 40-6s10-20 22-2 14 12 30-10 10 16 22 8'];
+  sl(8, 'Sign-off', '<div class="so"><div class="lbl">Sheet 08 · sign-off</div><h1>Thank you</h1><p>Built, tested and approved by the whole team.</p></div>' +
+    '<div class="stamp">APPROVED<small>' + Y[1] + ' · TEAM EFFORT</small></div>' +
+    '<div class="sigs">' + C.credits.map(function (c, i) { return '<div><svg viewBox="0 0 170 70"><path d="' + sq[i] + '"/></svg>' + c + '</div>'; }).join('') + '</div>');
+
+  Deck.render(S);
+})();
+</script>
+</body>
+</html>

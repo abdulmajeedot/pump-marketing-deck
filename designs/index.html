@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deck Designs</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#111113;color:#ececef;font-family:'Inter',system-ui,sans-serif;padding:48px 4vw 64px}
+header{max-width:1400px;margin:0 auto 34px}
+header small{font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#8d8d94}
+header h1{font-size:40px;font-weight:700;letter-spacing:-.02em;margin:8px 0 10px}
+header p{font-size:16px;color:#a1a1a8;max-width:760px;line-height:1.55}
+header code{font-size:14px;background:#222226;padding:2px 6px;border-radius:4px}
+.grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:26px}
+a.card{display:block;color:inherit;text-decoration:none;border-radius:10px;background:#18181b;border:1px solid #26262b;overflow:hidden;transition:border-color .2s,transform .2s}
+a.card:hover{border-color:#5b5b66;transform:translateY(-2px)}
+.th{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#000}
+.th iframe{position:absolute;left:0;top:0;width:1280px;height:720px;border:0;transform-origin:0 0;pointer-events:none}
+.meta{padding:16px 18px 18px}
+.meta b{font-size:18px;font-weight:700}
+.meta b span{color:#8d8d94;font-weight:600;margin-right:8px}
+.meta p{font-size:14.5px;color:#a1a1a8;margin-top:6px;line-height:1.5}
+</style>
+</head>
+<body>
+<header>
+  <small>Electrical Pumps · Marketing Meet</small>
+  <h1>Ten deck designs</h1>
+  <p>The same story told ten ways: each has its own storyline, slide layouts and illustrations. Every point is shown one at a time, so press → (or click) to walk through them. The words and numbers all live in <code>assets/content.js</code>, so one edit there updates every design.</p>
+</header>
+<div class="grid" id="grid"></div>
+<script>
+var D = [
+  ['01-blueprint', 'Blueprint', 'An engineering drawing set: the year as a pump system with three inputs, an impeller of segments and a manifold of channels, then the test reports.'],
+  ['02-pipeline', 'Pipeline', 'Water from source to supply: the team fills the tank, segments drive the pump, channels open the taps, results come out of the discharge.'],
+  ['03-editorial', 'Editorial', 'A magazine issue: cover lines, a contents page, an analysis spread with charts, and three features with pull quotes and a field guide.'],
+  ['04-swiss', 'Swiss', 'Strict grid, giant numerals and red accents. Each point gets the stage on its own, with the channels as expanding strips.'],
+  ['05-metro', 'Metro', 'A transit map: three lines with nineteen stations. A train moves stop by stop, then a departure board shows growth.'],
+  ['06-cinematic', 'Cinematic', 'A dark film in three acts: one glowing point on screen at a time, a prologue chart, a radial epilogue and rolling credits.'],
+  ['07-notebook', 'Notebook', 'Hand-drawn pages: doodled charts, sticky notes for the team, a ticked checklist for segments and a mind map of channels.'],
+  ['08-isometric', 'Isometric', 'Built block by block: the team as foundation tiles, segments as floors that stack up, channels as roads out to buyers.'],
+  ['09-scoreboard', 'Scoreboard', 'A season review: league table, form guide, playbook, a squad of six, a tactics board and seven away fixtures.'],
+  ['10-botanical', 'Botanical', 'Grown from the roots: the team as roots, segments as leaves, channels as flowers in bloom, and growth as the harvest.']
+];
+var g = document.getElementById('grid');
+D.forEach(function (d, i) {
+  g.insertAdjacentHTML('beforeend', '<a class="card" href="' + d[0] + '.html"><div class="th"><iframe loading="lazy" tabindex="-1" src="' + d[0] + '.html?thumb=1#1" title="' + d[1] + ' preview"></iframe></div>' +
+    '<div class="meta"><b><span>' + ('0' + (i + 1)).slice(-2) + '</span>' + d[1] + '</b><p>' + d[2] + '</p></div></a>');
+});
+function fit() { [].forEach.call(document.querySelectorAll('.th'), function (t) { t.firstChild.style.transform = 'scale(' + t.clientWidth / 1280 + ')'; }); }
+window.addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>

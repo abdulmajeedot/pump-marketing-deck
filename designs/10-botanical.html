@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10 · Botanical</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/deck.css">
+<style>
+:root{--cr:#f4efe6;--dg:#2f5d50;--lf:#6a994e;--lt:#a7c957;--tc:#bc6c25;--so:#6f4e37;--sun:#e9b44c;--mut:#6f6a5f;--serif:'DM Serif Display',Georgia,serif}
+.slide{background:var(--cr);color:var(--dg);font-family:'DM Sans',sans-serif}
+.hd{position:absolute;left:72px;top:52px}
+.hd small{font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--tc)}
+.hd h2{font-family:var(--serif);font-size:54px;font-weight:400;line-height:1.02;margin-top:8px}
+.hd h2 em{color:var(--lf)}
+.art{position:absolute;left:0;top:0;width:1280px;height:720px}
+.art text{font-family:'DM Sans'}
+@keyframes sway{50%{transform:rotate(2deg)}}
+.cap{position:absolute}
+.cap>div{position:absolute;inset:0;opacity:0;transform:translateY(10px);transition:opacity .45s,transform .45s}
+.cap>div.now{opacity:1;transform:none}
+.cap .ic{width:58px;height:58px;color:var(--lf);--isw:2;--ia:rgba(167,201,87,.4);margin-bottom:14px}
+.cap small{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--tc)}
+.cap b{display:block;font-family:var(--serif);font-weight:400;font-size:36px;line-height:1.08;margin:6px 0 10px}
+.cap p{font-size:20px;color:var(--mut);line-height:1.4}
+
+/* 1 cover */
+.cv{position:absolute;left:80px;top:170px;width:560px}
+.cv h1{font-family:var(--serif);font-weight:400;font-size:104px;line-height:.95;margin:18px 0 24px}
+.cv h1 em{color:var(--lf)}
+.cv p{font-size:23px;color:var(--mut);max-width:470px}
+.plant{transform-origin:900px 560px;animation:sway 6s ease-in-out infinite}
+
+/* roots */
+.root{fill:none;stroke:rgba(231,215,193,.28);stroke-width:5;stroke-linecap:round;transition:stroke .35s,stroke-width .35s}
+.root.in{stroke:#e7d7c1;stroke-width:7}
+.root.now{stroke:var(--lf);stroke-width:10}
+.rl{position:absolute;transform:translate(-50%,0);text-align:center;color:#f4efe6;font-weight:600;font-size:16px;cursor:pointer;opacity:.75;transition:opacity .3s}
+.rl i{display:grid;place-items:center;width:52px;height:52px;margin:0 auto 6px;border-radius:50%;background:rgba(244,239,230,.18);transition:background .3s}
+.rl .ic{width:30px;height:30px;--isw:2.2;color:#f4efe6;--ia:rgba(244,239,230,.25)}
+.rl.now{opacity:1}
+.rl.now i{background:var(--lt)}
+.rl.now .ic{color:var(--dg)}
+
+/* leaves */
+.leaf .lb{fill:#d9d3c4;transition:fill .4s;stroke:none}
+.leaf .rib{stroke:rgba(255,255,255,.7);stroke-width:2;fill:none}
+.leaf.in .lb{fill:var(--lf)}
+.leaf.now .lb{fill:var(--lt)}
+.leaf{transition:transform .5s}
+.ll{position:absolute;transform:translate(0,-50%);font-size:17px;font-weight:600;color:#a39d8f;white-space:nowrap;cursor:pointer;transition:color .3s}
+.ll.in{color:var(--dg)}
+.ll.now{color:var(--tc);font-weight:700}
+
+/* flowers */
+.fl .pt{fill:#e4ddcf;transition:fill .4s}
+.fl .ct{fill:#cfc6b4;transition:fill .4s}
+.fl.in .pt{fill:#e8a87c}
+.fl.in .ct{fill:var(--tc)}
+.fl.now .pt{fill:var(--sun)}
+.fl.now .ct{fill:var(--tc)}
+.fl{transition:transform .5s}
+.fn{position:absolute;transform:translate(-50%,0);font-size:16px;font-weight:600;color:#a39d8f;white-space:nowrap;cursor:pointer;transition:color .3s}
+.fn.in{color:var(--dg)}
+.fn.now{color:var(--tc);font-weight:700}
+
+/* charts */
+.mk{position:absolute;left:70px;top:170px;width:760px;height:480px}
+.mk .yr{font-size:14px;font-weight:700;letter-spacing:.16em}
+.side{position:absolute;left:880px;right:70px;top:220px}
+.side .sf{width:150px;height:150px}
+.side p{font-family:var(--serif);font-size:32px;line-height:1.15;margin-top:12px}
+.side small{display:block;font-size:15px;color:var(--mut);margin-top:12px}
+.note{position:absolute;right:72px;top:66px;font-size:13px;font-weight:700;letter-spacing:.14em;color:var(--tc);text-transform:uppercase;border:1.5px solid var(--tc);border-radius:999px;padding:7px 14px}
+
+/* close */
+.ty{position:absolute;left:80px;top:190px;width:640px}
+.ty h1{font-family:var(--serif);font-weight:400;font-size:96px;line-height:1}
+.ty h1 em{color:var(--lf)}
+.ty p{font-size:22px;color:var(--mut);margin-top:20px}
+.ty .cr{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.ty .cr span{padding:9px 16px;border-radius:999px;background:#e7e0d1;font-size:16px;font-weight:600}
+</style>
+</head>
+<body>
+<div id="viewport"><main class="stage" id="stage"></main></div>
+<script src="assets/content.js"></script>
+<script src="assets/icons.js"></script>
+<script src="assets/deck.js"></script>
+<script>
+(function () {
+  var Y = C.years, S = [], DG = '#2f5d50', LF = '#6a994e', LT = '#a7c957', TC = '#bc6c25', SO = '#6f4e37', SUN = '#e9b44c', MUT = '#6f6a5f';
+  function sl(h) { S.push('<section class="slide">' + h + '</section>'); }
+  function hd(s, h) { return '<div class="hd"><small>' + s + '</small><h2>' + h + '</h2></div>'; }
+  function leaf(x, y, L, ang, cls, attr, fill) {
+    return '<g class="leaf ' + (cls || '') + '" ' + (attr || '') + ' transform="translate(' + x + ' ' + y + ') rotate(' + ang + ')"><path class="lb" ' + (fill ? 'style="fill:' + fill + '"' : '') + ' d="M0 0C' + L * .3 + ' ' + (-L * .36) + ' ' + L * .72 + ' ' + (-L * .34) + ' ' + L + ' 0C' + L * .72 + ' ' + L * .34 + ' ' + L * .3 + ' ' + L * .36 + ' 0 0Z"/><path class="rib" d="M4 0H' + (L - 8) + '"/></g>';
+  }
+  function flower(x, y, r, cls, attr, cp, cc) {
+    var s = '<g class="fl ' + (cls || '') + '" ' + (attr || '') + '>';
+    for (var i = 0; i < 6; i++) s += '<ellipse class="pt" ' + (cp ? 'style="fill:' + cp + '"' : '') + ' cx="' + x + '" cy="' + (y - r * .62) + '" rx="' + r * .38 + '" ry="' + r * .6 + '" transform="rotate(' + i * 60 + ' ' + x + ' ' + y + ')"/>';
+    return s + '<circle class="ct" ' + (cc ? 'style="fill:' + cc + '"' : '') + ' cx="' + x + '" cy="' + y + '" r="' + r * .34 + '"/></g>';
+  }
+
+  /* 1 cover */
+  var pl = '<path d="M900 560C900 470 880 380 905 250" fill="none" stroke="' + DG + '" stroke-width="10" stroke-linecap="round"/>' +
+    leaf(898, 500, 150, -160, '', '', LF) + leaf(902, 440, 160, -20, '', '', LT) + leaf(896, 380, 140, -150, '', '', LT) + leaf(903, 320, 130, -30, '', '', LF) +
+    flower(905, 230, 64, '', '', SUN, TC);
+  sl('<div class="cv"><small style="font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#bc6c25">' + C.org + '</small><h1>Grown from<br>the <em>roots</em></h1><p>How the team, the segments and the channels grew this year.</p></div>' +
+    '<svg class="art" viewBox="0 0 1280 720"><g class="plant">' + pl + '</g><path d="M780 560H1020L995 690H805Z" fill="' + TC + '"/><rect x="765" y="548" width="270" height="30" rx="6" fill="#a85c1f"/></svg>');
+
+  /* 2 overview */
+  var ov = '<rect x="0" y="470" width="1280" height="250" fill="' + SO + '"/><path d="M640 470C635 380 640 300 640 250" stroke="' + DG + '" stroke-width="22" fill="none" stroke-linecap="round"/>';
+  [[-150, 470, 340, 330], [-30, 470, 940, 320], [-110, 420, 470, 250], [-70, 420, 810, 240]].forEach(function (b) { ov += '<path d="M640 ' + b[1] + 'Q640 ' + (b[1] - 80) + ' ' + b[2] + ' ' + b[3] + '" stroke="' + DG + '" stroke-width="10" fill="none" stroke-linecap="round"/>'; });
+  [[340, 330], [940, 320], [470, 250], [810, 240], [640, 210]].forEach(function (f, i) { ov += flower(f[0], f[1], 40, '', '', [SUN, '#e8a87c', SUN, '#e8a87c', SUN][i], TC); });
+  ov += leaf(640, 380, 110, -160, '', '', LF) + leaf(640, 340, 110, -20, '', '', LT);
+  ['M640 480C600 540 520 560 430 640', 'M640 480C660 560 740 590 860 650', 'M640 480C640 560 620 620 640 700', 'M640 480C580 510 470 510 360 560', 'M640 480C700 510 820 510 930 550'].forEach(function (d) { ov += '<path d="' + d + '" stroke="#e7d7c1" stroke-width="5" fill="none" stroke-linecap="round"/>'; });
+  ov += '<text x="1000" y="250" font-size="16" font-weight="700" fill="' + TC + '" letter-spacing="2">FLOWERS</text><text x="1000" y="276" font-family="DM Serif Display" font-size="30" fill="' + DG + '">Channels</text>' +
+    '<text x="140" y="410" font-size="16" font-weight="700" fill="' + TC + '" letter-spacing="2">LEAVES</text><text x="140" y="436" font-family="DM Serif Display" font-size="30" fill="' + DG + '">Segments</text>' +
+    '<text x="1000" y="600" font-size="16" font-weight="700" fill="#e9b44c" letter-spacing="2">ROOTS</text><text x="1000" y="626" font-family="DM Serif Display" font-size="30" fill="#f4efe6">Team</text>';
+  sl(hd('How it grew', 'Roots, leaves, <em>flowers</em>') + '<svg class="art" viewBox="0 0 1280 720">' + ov + '</svg>');
+
+  /* 3 roots: team */
+  var ends = [[220, 430], [370, 555], [560, 615], [740, 615], [920, 555], [1070, 430]], rt = '', rl = '';
+  ends.forEach(function (e, i) {
+    rt += '<path class="root" data-at="' + i + '" d="M640 262C640 330 ' + ((640 + e[0]) / 2) + ' ' + (e[1] - 120) + ' ' + e[0] + ' ' + (e[1] - 20) + '"/>';
+    rl += '<div class="rl" data-at="' + i + '" data-go="' + i + '" style="left:' + e[0] + 'px;top:' + (e[1] - 22) + 'px"><i>' + I(C.team[i].i) + '</i>' + C.team[i].k + '</div>';
+  });
+  sl('<svg class="art" viewBox="0 0 1280 720"><rect x="0" y="262" width="1280" height="458" fill="' + SO + '"/><path d="M640 262V200" stroke="' + DG + '" stroke-width="10" stroke-linecap="round"/>' + leaf(640, 215, 70, -150, '', '', LF) + leaf(640, 205, 70, -30, '', '', LT) + rt + '</svg>' + rl +
+    hd('Part 1 · the roots', 'The <em>team</em>, underground') +
+    '<div class="cap" style="left:760px;right:72px;top:60px;height:190px">' + C.team.map(function (p, i) { return '<div data-at="' + i + '"><small>Root ' + (i + 1) + ' of 6</small><b style="font-size:30px">' + p.t + '</b><p style="font-size:18px">' + p.l + '</p></div>'; }).join('') + '</div>');
+
+  /* 4 leaves: segments */
+  var sx = 760, lv = '', lt = '';
+  C.segment.forEach(function (p, i) {
+    var y = 600 - i * 82, left = i % 2 === 0, L = 170;
+    lv += leaf(sx, y, L, left ? -158 : -22, '', 'data-at="' + i + '" data-go="' + i + '"');
+    lt += '<div class="ll" data-at="' + i + '" data-go="' + i + '" style="top:' + (y - 62) + 'px;' + (left ? 'right:' + (1280 - (sx - L * .92) + 14) : 'left:' + (sx + L * .92 + 14)) + 'px">' + (i + 1) + ' · ' + p.k + '</div>';
+  });
+  sl(hd('Part 2 · the leaves', 'Each <em>segment</em> a new leaf') + '<svg class="art" viewBox="0 0 1280 720"><path d="M' + sx + ' 700C' + (sx - 10) + ' 520 ' + (sx + 12) + ' 300 ' + sx + ' 130" stroke="' + DG + '" stroke-width="10" fill="none" stroke-linecap="round"/>' + lv + '</svg>' + lt +
+    '<div class="cap" style="left:72px;width:420px;top:220px;height:380px">' + C.segment.map(function (p, i) { return '<div data-at="' + i + '">' + I(p.i) + '<small>Leaf ' + (i + 1) + ' of 6</small><b>' + p.t + '</b><p>' + p.l + '</p></div>'; }).join('') + '</div>');
+
+  /* 5 flowers: channels */
+  var br = '<path d="M640 720C640 640 645 560 640 500" stroke="' + DG + '" stroke-width="20" fill="none" stroke-linecap="round"/>', fs = '', fn = '';
+  C.channels.forEach(function (p, i) {
+    var a = (-168 + i * 26) * Math.PI / 180, x = Math.round(640 + 410 * Math.cos(a)), y = Math.round(480 + 236 * Math.sin(a));
+    br += '<path d="M640 500Q' + ((640 + x) / 2) + ' ' + (y + 70) + ' ' + x + ' ' + y + '" stroke="' + DG + '" stroke-width="7" fill="none" stroke-linecap="round"/>';
+    fs += flower(x, y, 40, '', 'data-at="' + i + '" data-go="' + i + '"');
+    fn += '<div class="fn" data-at="' + i + '" data-go="' + i + '" style="left:' + x + 'px;top:' + (y + 54) + 'px">' + p.k + '</div>';
+  });
+  sl(hd('Part 3 · the flowers', 'Seven <em>channels</em> in bloom') + '<svg class="art" viewBox="0 0 1280 720">' + br + fs + '</svg>' + fn +
+    '<div class="cap" style="left:72px;width:470px;top:520px;height:160px">' + C.channels.map(function (p, i) { return '<div data-at="' + i + '"><small>Flower ' + (i + 1) + ' of 7</small><b style="font-size:30px">' + p.t + '</b><p style="font-size:18px">' + p.l + '</p></div>'; }).join('') + '</div>');
+
+  /* 6 harvest: growth */
+  var hv = '<rect x="0" y="600" width="1280" height="120" fill="' + SO + '"/>';
+  C.growth.forEach(function (d, i) {
+    var x = 160 + i * 106, h = d[1] / 20 * 340, top = 600 - h, hot = i < 3;
+    hv += '<path d="M' + x + ' 600V' + top + '" stroke="' + DG + '" stroke-width="6" stroke-linecap="round"/>';
+    for (var k = 1; k * 60 < h - 20; k++) hv += leaf(x, 600 - k * 60, 34, k % 2 ? -150 : -30, '', '', k % 2 ? LF : LT);
+    hv += '<circle cx="' + x + '" cy="' + (top - 6) + '" r="15" fill="' + (hot ? SUN : TC) + '"/>' +
+      '<text x="' + x + '" y="' + (top - 32) + '" text-anchor="middle" font-size="19" font-weight="700" fill="' + DG + '">+' + d[1] + '%</text><text x="' + x + '" y="636" text-anchor="middle" font-size="15" fill="#f4efe6">' + d[0] + '</text>';
+  });
+  sl(hd('The harvest', 'Every line <em>grew taller</em>') + '<div class="note">' + C.growthNote + '</div><svg class="art" viewBox="0 0 1280 720">' + hv + '</svg>');
+
+  /* 7 the field: market */
+  var mk = Deck.slope(C.market, { w: 760, h: 480, x1: 170, x2: 590, years: Y, ink: DG, sub: MUT, axis: DG, fs: 18, font: 'DM Sans', hi: 1, r: 8, gap: 24,
+    color: function (d, i) { return i === 1 ? TC : i === 0 ? LF : '#c9c1b0'; }, width: function (d, i) { return i < 2 ? 6 : 3; } });
+  sl(hd('The wider field', 'B grew <em>tallest</em> in the market') + '<div class="mk">' + mk + '</div>' +
+    '<div class="side"><svg class="sf" viewBox="0 0 150 150">' + flower(75, 75, 70, '', '', SUN, TC) + '</svg><p>B rose from second to first, from 8 to 14.</p><small>' + Y[0] + ' to ' + Y[1] + '</small></div>');
+
+  /* 8 close: watering can */
+  var can = '<g transform="translate(820 230)"><path d="M60 120H250V300a20 20 0 0 1-20 20H80a20 20 0 0 1-20-20Z" fill="' + LF + '"/><path d="M250 160L360 70" stroke="' + LF + '" stroke-width="22" stroke-linecap="round"/><rect x="340" y="40" width="50" height="40" rx="8" transform="rotate(-38 365 60)" fill="' + DG + '"/>' +
+    '<path d="M80 120C80 50 230 50 230 120" fill="none" stroke="' + DG + '" stroke-width="16"/><path d="M370 100c-6 10-9 15-9 19a9 9 0 0 0 18 0c0-4-3-9-9-19zM395 140c-6 10-9 15-9 19a9 9 0 0 0 18 0c0-4-3-9-9-19zM350 150c-6 10-9 15-9 19a9 9 0 0 0 18 0c0-4-3-9-9-19z" fill="#8ecae6"/></g>' +
+    leaf(1180, 640, 90, -120, '', '', LT) + leaf(1180, 640, 90, -60, '', '', LF);
+  sl('<svg class="art" viewBox="0 0 1280 720">' + can + '</svg><div class="ty"><small style="font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#bc6c25">With thanks</small><h1>Thank you for <em>tending</em> it</h1><p>Everything that grew this year was planted and watered by the team.</p><div class="cr">' +
+    C.credits.map(function (c) { return '<span>' + c + '</span>'; }).join('') + '</div></div>');
+
+  Deck.render(S);
+})();
+</script>
+</body>
+</html>

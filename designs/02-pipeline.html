@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02 · Pipeline</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/deck.css">
+<style>
+:root{--deep:#04293a;--mid:#0a4a63;--aqua:#3fd0d4;--aq2:#1b9fb0;--foam:#ecfbfc;--sun:#ffb703;--mut:rgba(236,251,252,.66);--line:rgba(236,251,252,.16)}
+.slide{background:radial-gradient(1100px 700px at 75% 10%,#0b4f6c 0,transparent 60%),linear-gradient(160deg,#063247,#03202e);color:var(--foam);font-family:'Outfit',sans-serif}
+.lbl{font-size:14px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--aqua)}
+.hd{position:absolute;left:80px;top:54px}
+.hd h2{font-size:46px;line-height:1.08;font-weight:700;margin-top:10px;letter-spacing:-.01em}
+.hd h2 em{font-style:normal;color:var(--aqua)}
+.mp{position:absolute;left:0;bottom:16px;width:1280px;height:30px}
+.num{font-weight:800;color:var(--aqua)}
+@keyframes flow{to{stroke-dashoffset:-40}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes drip{0%{transform:translateY(0);opacity:0}15%{opacity:1}85%{opacity:1}100%{transform:translateY(58px);opacity:0}}
+@keyframes bob{50%{transform:translateY(-4px)}}
+.fl{fill:none;stroke:var(--aqua);stroke-dasharray:12 28;stroke-linecap:round;animation:flow 1.1s linear infinite}
+
+/* 1 cover */
+.cv{position:absolute;left:84px;top:150px;width:620px}
+.cv h1{font-size:104px;line-height:.95;font-weight:800;letter-spacing:-.03em;margin:18px 0 26px}
+.cv h1 em{font-style:normal;background:linear-gradient(90deg,var(--aqua),#a8f1f3);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cv p{font-size:24px;color:var(--mut);max-width:520px}
+.drop{position:absolute;right:70px;top:70px;width:470px;height:560px}
+.drop .imp{transform-origin:235px 352px;animation:spin 22s linear infinite}
+
+/* 2 route */
+.route{position:absolute;left:0;top:0;width:1280px;height:720px}
+.route .pp{stroke:#0e5f7c;stroke-width:22;fill:none}
+.route g[data-at] .fl{opacity:0}
+.route g.in .fl{opacity:1}
+.st{position:absolute;top:262px;width:240px;text-align:center;opacity:.32;transition:opacity .5s}
+.st.in{opacity:1}
+.st .ring{width:150px;height:150px;margin:0 auto 18px;border-radius:50%;border:3px solid var(--aqua);background:radial-gradient(circle at 35% 30%,#0f6f8c,#06344a);display:grid;place-items:center;transition:all .5s}
+.st.now .ring{background:radial-gradient(circle at 35% 30%,#58e3e6,#1b9fb0);box-shadow:0 0 0 10px rgba(63,208,212,.15),0 0 60px rgba(63,208,212,.45)}
+.st .ic{width:70px;height:70px;--isw:2.2;--ia:rgba(63,208,212,.35)}
+.st.now .ic{color:var(--deep);--ia:rgba(4,41,58,.25)}
+.st b{display:block;font-size:24px;margin-top:6px}
+.st p{font-size:16px;color:var(--mut);margin-top:6px;line-height:1.35}
+
+/* 3 tank */
+.tank{position:absolute;left:90px;top:160px;width:470px;height:500px}
+.tank text{font-family:'Outfit';fill:var(--foam)}
+.tank .ly{opacity:0;transition:opacity .5s}
+.tank .ly.in{opacity:1}
+.tank .lt{fill:rgba(236,251,252,.35);font-size:18px;font-weight:600;transition:fill .4s}
+.tank .lt.in{fill:var(--deep)}
+.tank .lt.now{fill:var(--deep);font-weight:800}
+.tank .wv{opacity:0}
+.tank .wv.now{opacity:1;animation:bob 2.4s ease-in-out infinite}
+.cap{position:absolute;left:640px;right:80px;top:220px;height:380px}
+.cap>div{position:absolute;inset:0;opacity:0;transform:translateY(16px);transition:opacity .45s,transform .45s}
+.cap>div.now{opacity:1;transform:none}
+.cap .ic{width:96px;height:96px;color:var(--aqua);--isw:2;--ia:rgba(63,208,212,.25);margin-bottom:24px}
+.cap .k{font-size:76px;font-weight:800;line-height:1;letter-spacing:-.02em}
+.cap .t{font-size:24px;font-weight:600;margin-top:16px;color:var(--aqua)}
+.cap .l{font-size:22px;color:var(--mut);margin-top:10px;max-width:520px}
+
+/* 4 pump */
+.pm{position:absolute;inset:0;width:1280px;height:720px}
+.pm .sp{stroke:#0e5f7c;stroke-width:14;fill:none}
+.pm g .fl{opacity:0}
+.pm g.now .fl{opacity:1}
+.pm .imp{transform-origin:830px 390px;animation:spin 9s linear infinite}
+.nd{position:absolute;width:150px;margin-left:-75px;margin-top:-50px;text-align:center;cursor:pointer}
+.nd i{display:grid;place-items:center;width:100px;height:100px;margin:0 auto;border-radius:50%;background:#073a50;border:3px solid #0e6f8c;transition:all .4s}
+.nd .ic{width:52px;height:52px;--ia:rgba(63,208,212,.3)}
+.nd b{display:block;font-size:16px;font-weight:600;margin-top:8px;color:var(--mut)}
+.nd.now i{background:var(--aqua);border-color:var(--aqua);box-shadow:0 0 50px rgba(63,208,212,.55)}
+.nd.now .ic{color:var(--deep);--ia:rgba(4,41,58,.2)}
+.nd.now b{color:var(--foam)}
+.cap.l2{left:80px;right:auto;width:440px;top:250px}
+.cap.l2 .k{font-size:60px}
+
+/* 5 outlets */
+.ol{position:absolute;inset:0;width:1280px;height:720px}
+.ol .pp{stroke:#0e5f7c;stroke-width:24;fill:none}
+.ol .dp{stroke:#0e5f7c;stroke-width:14;fill:none}
+.ol .wh{fill:none;stroke:var(--mut);stroke-width:2.5}
+.ol g.in .wh{stroke:var(--aqua)}
+.ol .drp{fill:var(--aqua);opacity:0}
+.ol g.now .drp{opacity:1;animation:drip 1.2s ease-in infinite}
+.ol .gl{fill:none;stroke:rgba(236,251,252,.45);stroke-width:2.5}
+.ol .gw{fill:url(#plW);opacity:0;transition:opacity .5s}
+.ol g.in .gw{opacity:1}
+.ol text{font-family:'Outfit';font-size:16px;font-weight:600;fill:var(--mut);text-anchor:middle}
+.ol g.now text{fill:var(--foam)}
+.oc{position:absolute;left:80px;right:80px;top:520px;height:110px}
+.oc>div{position:absolute;inset:0;display:flex;align-items:center;gap:26px;opacity:0;transition:opacity .4s}
+.oc>div.now{opacity:1}
+.oc .ic{width:72px;height:72px;flex:none;color:var(--aqua);--ia:rgba(63,208,212,.25)}
+.oc b{font-size:34px;font-weight:700}
+.oc p{font-size:20px;color:var(--mut);margin-top:4px}
+
+/* 6 tubes, 7 market */
+.tb6{position:absolute;inset:0;width:1280px;height:720px}
+.tb6 text{font-family:'Outfit';fill:var(--foam);text-anchor:middle}
+.chip{position:absolute;right:80px;top:70px;border:1.5px solid var(--sun);color:var(--sun);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.mk{position:absolute;left:70px;top:200px;width:800px;height:440px}
+.mk .yr{font-size:14px;font-weight:600;letter-spacing:.2em}
+.side{position:absolute;left:930px;right:70px;top:230px}
+.side .big{font-size:150px;font-weight:800;line-height:.85;color:var(--sun)}
+.side p{font-size:24px;color:var(--mut);margin-top:16px}
+.side p b{color:var(--foam)}
+
+/* 8 close */
+.cl{position:absolute;left:0;right:0;top:170px;text-align:center}
+.cl h1{font-size:120px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.cl h1 em{font-style:normal;color:var(--aqua)}
+.cl p{font-size:26px;color:var(--mut);margin-top:18px}
+.drops{display:flex;justify-content:center;gap:34px;margin-top:60px}
+.drops div{text-align:center;font-size:17px;font-weight:600}
+.drops svg{display:block;width:54px;height:70px;margin:0 auto 10px}
+</style>
+</head>
+<body>
+<div id="viewport"><main class="stage" id="stage"></main></div>
+<script src="assets/content.js"></script>
+<script src="assets/icons.js"></script>
+<script src="assets/deck.js"></script>
+<script>
+(function () {
+  var Y = C.years, S = [];
+  Deck.defs(
+    '<linearGradient id="plW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7be8ea"/><stop offset="1" stop-color="#1b9fb0"/></linearGradient>' +
+    '<linearGradient id="plD" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7be8ea"/><stop offset=".6" stop-color="#1b9fb0"/><stop offset="1" stop-color="#0a5f74"/></linearGradient>');
+  var mp = '<svg class="mp" viewBox="0 0 1280 30"><path d="M0 15H1280" stroke="#0b4f66" stroke-width="16"/><path class="fl" d="M0 15H1280" stroke-width="4"/></svg>';
+  function sl(h) { S.push('<section class="slide">' + h + mp + '</section>'); }
+  function hd(l, h) { return '<div class="hd"><div class="lbl">' + l + '</div><h2>' + h + '</h2></div>'; }
+  function wave(x0, x1, y, a, len) { var d = 'M' + x0 + ' ' + y; for (var x = x0; x < x1; x += len) d += 'q' + len / 4 + ' ' + (-a) + ' ' + len / 2 + ' 0t' + len / 2 + ' 0'; return d; }
+  function impeller(cx, cy, r, col) {
+    var s = '<g class="imp"><circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="' + col + '" stroke-width="4"/>';
+    for (var i = 0; i < 6; i++) s += '<path d="M' + cx + ' ' + (cy - r * .25) + 'C' + (cx + r * .35) + ' ' + (cy - r * .55) + ' ' + (cx + r * .7) + ' ' + (cy - r * .7) + ' ' + (cx + r * .9) + ' ' + (cy - r * .3) + '" fill="none" stroke="' + col + '" stroke-width="' + Math.max(4, r / 14) + '" stroke-linecap="round" transform="rotate(' + i * 60 + ' ' + cx + ' ' + cy + ')"/>';
+    return s + '<circle cx="' + cx + '" cy="' + cy + '" r="' + r * .22 + '" fill="' + col + '"/></g>';
+  }
+
+  /* 1 cover */
+  sl('<div class="cv"><div class="lbl">' + C.org + '</div><h1>From source<br>to <em>supply</em></h1><p>How the team, the segments and the channels kept the year flowing.</p></div>' +
+    '<svg class="drop" viewBox="0 0 470 560"><path d="M235 20C235 20 40 250 40 362a195 195 0 0 0 390 0C430 250 235 20 235 20z" fill="url(#plD)"/>' +
+    '<path d="M235 20C235 20 40 250 40 362a195 195 0 0 0 390 0C430 250 235 20 235 20z" fill="none" stroke="#a8f1f3" stroke-width="3" stroke-opacity=".6"/>' +
+    impeller(235, 352, 120, '#04293a') + '<path d="M120 300c10-40 40-90 70-130" stroke="#ecfbfc" stroke-width="10" stroke-linecap="round" fill="none" opacity=".55"/></svg>');
+
+  /* 2 route */
+  var xs = [180, 500, 820, 1140], names = [['Source', C.pillars[0]], ['Pump', C.pillars[1]], ['Outlets', C.pillars[2]], ['Discharge', { n: 'Results', l: 'Higher in the market, growth in every line.', i: 'pump' }]];
+  var pipes = '';
+  for (var i = 0; i < 3; i++) pipes += '<g data-at="' + (i + 1) + '"><path class="pp" d="M' + (xs[i] + 75) + ' 337H' + (xs[i + 1] - 75) + '"/><path class="fl" d="M' + (xs[i] + 75) + ' 337H' + (xs[i + 1] - 75) + '" stroke-width="5"/></g>';
+  sl(hd('The route', 'Four stops <em>from source to supply</em>') + '<svg class="route" viewBox="0 0 1280 720">' + pipes + '</svg>' +
+    names.map(function (n, i) { return '<div class="st" data-at="' + i + '" style="left:' + (xs[i] - 120) + 'px"><div class="ring">' + I(n[1].i) + '</div><span class="lbl">0' + (i + 1) + ' · ' + n[0] + '</span><b>' + n[1].n + '</b><p>' + n[1].l + '</p></div>'; }).join(''));
+
+  /* 3 source: team tank */
+  var ly = '', lt = '', wv = '', H = 70, base = 470;
+  C.team.forEach(function (p, i) {
+    var y = base - (i + 1) * H;
+    ly += '<rect class="ly" data-at="' + i + '" x="24" y="' + y + '" width="422" height="' + H + '" fill="url(#plW)" fill-opacity="' + (0.55 + i * .08) + '"/>';
+    wv += '<path class="wv" data-at="' + i + '" d="' + wave(24, 446, y, 7, 47) + 'V' + (y + 10) + 'H24Z" fill="#7be8ea"/>';
+    lt += '<text class="lt" data-at="' + i + '" x="52" y="' + (y + H / 2 + 7) + '">0' + (i + 1) + '  ' + p.k + '</text>';
+  });
+  sl(hd('Stop 01 · the source', 'The team <em>filled the tank</em>') +
+    '<svg class="tank" viewBox="0 0 470 500"><rect x="20" y="20" width="430" height="454" rx="18" fill="rgba(236,251,252,.04)" stroke="rgba(236,251,252,.5)" stroke-width="4"/>' + ly + wv + lt +
+    '<path d="M0 470H470" stroke="rgba(236,251,252,.5)" stroke-width="4"/></svg>' +
+    '<div class="cap">' + C.team.map(function (p, i) { return '<div data-at="' + i + '">' + I(p.i) + '<div class="k">' + p.k + '</div><div class="t">' + p.t + '</div><div class="l">' + p.l + '</div></div>'; }).join('') + '</div>');
+
+  /* 4 pump: segments */
+  var cx = 830, cy = 390, R = 205, sp = '', nd = '';
+  C.segment.forEach(function (p, i) {
+    var a = (-90 + i * 60) * Math.PI / 180, x = Math.round(cx + R * Math.cos(a)), y = Math.round(cy + R * Math.sin(a));
+    var x0 = Math.round(cx + 95 * Math.cos(a)), y0 = Math.round(cy + 95 * Math.sin(a));
+    sp += '<g data-at="' + i + '"><path class="sp" d="M' + x0 + ' ' + y0 + 'L' + x + ' ' + y + '"/><path class="fl" d="M' + x0 + ' ' + y0 + 'L' + x + ' ' + y + '" stroke-width="4"/></g>';
+    nd += '<div class="nd" data-at="' + i + '" data-go="' + i + '" style="left:' + x + 'px;top:' + y + 'px"><i>' + I(p.i) + '</i><b>' + p.k + '</b></div>';
+  });
+  sl(hd('Stop 02 · the pump', 'Six segments, <em>one impeller</em>') +
+    '<svg class="pm" viewBox="0 0 1280 720">' + sp + '<circle cx="' + cx + '" cy="' + cy + '" r="96" fill="#073a50" stroke="#0e6f8c" stroke-width="4"/>' + impeller(cx, cy, 70, '#3fd0d4') + '</svg>' + nd +
+    '<div class="cap l2">' + C.segment.map(function (p, i) { return '<div data-at="' + i + '"><div class="k">' + p.k + '</div><div class="t">' + p.t + '</div><div class="l">' + p.l + '</div></div>'; }).join('') + '</div>');
+
+  /* 5 outlets: channels */
+  var tp = '';
+  C.channels.forEach(function (p, i) {
+    var x = 170 + i * 157;
+    tp += '<g data-at="' + i + '" data-go="' + i + '"><path class="dp" d="M' + x + ' 230V306"/><circle class="wh" cx="' + x + '" cy="262" r="12"/><path class="wh" d="M' + (x - 12) + ' 262H' + (x + 12) + 'M' + x + ' 250V274"/>' +
+      '<path class="drp" d="M' + x + ' 312c-4 6-6 9-6 12a6 6 0 0 0 12 0c0-3-2-6-6-12z"/>' +
+      '<rect class="gw" x="' + (x - 26) + '" y="392" width="52" height="46" rx="3"/><path class="gl" d="M' + (x - 30) + ' 372V438a4 4 0 0 0 4 4h52a4 4 0 0 0 4-4V372"/>' +
+      '<text x="' + x + '" y="474">' + p.k + '</text></g>';
+  });
+  sl(hd('Stop 03 · the outlets', 'Seven taps, <em>seven new routes</em>') +
+    '<svg class="ol" viewBox="0 0 1280 720"><path class="pp" d="M0 230H1180"/><path class="fl" d="M0 230H1180" stroke-width="5"/><circle cx="1186" cy="230" r="14" fill="#0e5f7c"/>' + tp + '</svg>' +
+    '<div class="oc">' + C.channels.map(function (p, i) { return '<div data-at="' + i + '">' + I(p.i) + '<div><b>' + p.t + '</b><p>' + p.l + '</p></div></div>'; }).join('') + '</div>');
+
+  /* 6 discharge: growth tubes */
+  var tb = '';
+  C.growth.forEach(function (d, i) {
+    var x = 130 + i * 106, h = d[1] / 20 * 330, top = 600 - h;
+    tb += '<path d="M' + (x - 30) + ' 250V588a12 12 0 0 0 12 12h36a12 12 0 0 0 12-12V250" fill="rgba(236,251,252,.04)" stroke="rgba(236,251,252,.35)" stroke-width="2.5"/>' +
+      '<path d="M' + (x - 27) + ' ' + top + 'q7.5 -5 15 0t15 0t15 0t9 0V588a10 10 0 0 1-10 10H' + (x - 17) + 'a10 10 0 0 1-10-10Z" fill="url(#plW)"/>' +
+      '<text x="' + x + '" y="' + (top - 14) + '" font-size="22" font-weight="800">+' + d[1] + '%</text><text x="' + x + '" y="636" font-size="15" fill="rgba(236,251,252,.7)">' + d[0] + '</text>';
+  });
+  sl(hd('Stop 04 · the discharge', 'What came out: <em>every line grew</em>') + '<div class="chip">' + C.growthNote + '</div><svg class="tb6" viewBox="0 0 1280 720">' + tb + '</svg>');
+
+  /* 7 market */
+  var cols = ['#3fd0d4', '#ffb703', '#1b9fb0', '#7be8ea', '#127890', '#5fb8c4'];
+  sl(hd('Downstream', 'Where it took us <em>in the market</em>') +
+    '<div class="mk">' + Deck.sankey(C.market.map(function (d, i) { return [d[0], d[1], d[2], cols[i]]; }), { w: 800, h: 440, xl: 70, xr: 680, rank: true, years: Y, ink: '#ecfbfc', sub: 'rgba(236,251,252,.65)', node: '#ecfbfc', fs: 18, font: 'Outfit', op: .9 }) + '</div>' +
+    '<div class="side"><div class="big">B</div><p><b>Second to first.</b><br>8 in ' + Y[0] + ', 14 in ' + Y[1] + '.</p></div>');
+
+  /* 8 close */
+  sl('<div class="cl"><div class="lbl">Thank you</div><h1>Keep it <em>flowing</em></h1><p>Built by the whole team, one drop at a time.</p>' +
+    '<div class="drops">' + C.credits.map(function (c, i) { return '<div><svg viewBox="0 0 54 70"><path d="M27 4C27 4 6 32 6 45a21 21 0 0 0 42 0C48 32 27 4 27 4z" fill="' + ['#3fd0d4', '#7be8ea', '#1b9fb0', '#ffb703', '#a8f1f3'][i] + '"/></svg>' + c + '</div>'; }).join('') + '</div></div>');
+
+  Deck.render(S);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>04 · Swiss</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/deck.css">
+<style>
+:root{--w:#ffffff;--k:#111111;--r:#e10600;--g:#8a8a8a;--l:#e4e4e4}
+.slide{background:var(--w);color:var(--k);font-family:'Archivo',sans-serif}
+.grid{position:absolute;inset:0;background-image:linear-gradient(90deg,var(--l) 1px,transparent 1px);background-size:106.66px 100%;background-position:-1px 0;opacity:.6}
+.top{position:absolute;left:54px;right:54px;top:36px;display:flex;justify-content:space-between;font-size:13px;font-weight:700;letter-spacing:.02em}
+.top span:last-child{color:var(--r)}
+h2{position:absolute;left:54px;top:84px;font-size:54px;line-height:1;font-weight:800;letter-spacing:-.03em;max-width:860px}
+h2 em{font-style:normal;color:var(--r)}
+.dot{display:inline-block;width:.6em;height:.6em;border-radius:50%;background:var(--r);vertical-align:.05em}
+
+/* 1 cover */
+.yr{position:absolute;left:30px;bottom:-60px;font-size:420px;line-height:1;font-weight:900;letter-spacing:-.07em}
+.yr em{font-style:normal;color:var(--r)}
+.circ{position:absolute;right:110px;top:90px;width:300px;height:300px;border-radius:50%;background:var(--r)}
+.ttl{position:absolute;left:54px;top:110px;font-size:64px;line-height:.98;font-weight:800;letter-spacing:-.03em}
+.sub{position:absolute;left:54px;top:270px;font-size:18px;font-weight:500;color:var(--g);max-width:420px}
+
+/* 2 bump, 3 bars */
+.ch{position:absolute;left:54px;top:200px;width:740px;height:460px}
+.ch text{font-family:'Archivo'}
+.bigc{position:absolute;left:860px;right:54px;top:210px}
+.bigc .n{font-size:150px;line-height:.8;font-weight:900;letter-spacing:-.06em;color:var(--r)}
+.bigc p{font-size:22px;font-weight:600;margin-top:24px;line-height:1.3}
+.bigc small{display:block;font-size:13px;font-weight:600;color:var(--g);margin-top:16px;letter-spacing:.04em}
+
+/* 4 three moves */
+.mv{position:absolute;left:54px;right:54px;top:230px;display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.mv>div{padding:0 30px 0 0;border-left:2px solid var(--k);padding-left:22px}
+.mv .n{font-size:240px;line-height:.8;font-weight:900;letter-spacing:-.07em}
+.mv>div:nth-child(1) .n{color:var(--r)}
+.mv b{display:block;font-size:30px;font-weight:800;letter-spacing:-.02em;margin-top:30px;line-height:1.05}
+.mv p{font-size:17px;color:var(--g);font-weight:500;margin-top:10px}
+
+/* 5 team: giant number */
+.gn{position:absolute;left:30px;top:150px;width:640px;height:560px}
+.gn>div{position:absolute;inset:0;opacity:0;transition:opacity .35s}
+.gn>div.now{opacity:1}
+.gn .n{font-size:520px;line-height:.78;font-weight:900;letter-spacing:-.08em;color:var(--r)}
+.gn .k{position:absolute;left:24px;bottom:20px;font-size:62px;font-weight:800;letter-spacing:-.03em;background:var(--w);padding-right:16px}
+.tl{position:absolute;left:747px;right:54px;top:200px}
+.tl>div{display:grid;grid-template-columns:44px 1fr;padding:13px 0;border-top:2px solid var(--k);cursor:pointer}
+.tl span{font-size:15px;font-weight:800;color:var(--g)}
+.tl b{font-size:19px;font-weight:600;color:var(--g);line-height:1.2}
+.tl p{grid-column:2;display:none;font-size:16px;font-weight:500;margin-top:6px}
+.tl .now span{color:var(--r)}
+.tl .now b{color:var(--k);font-weight:800}
+.tl .now p{display:block}
+
+/* 6 segments: squares row */
+.sq{position:absolute;left:54px;right:54px;top:200px;display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.sq>div{aspect-ratio:1;border:2px solid var(--k);display:grid;place-items:center;cursor:pointer;position:relative;transition:background .3s,color .3s}
+.sq .ic{width:58%;height:58%;--isw:2;--ia:rgba(225,6,0,.18)}
+.sq span{position:absolute;left:10px;top:8px;font-size:14px;font-weight:800}
+.sq .now{background:var(--r);border-color:var(--r);color:var(--w)}
+.sq .now .ic{--ia:rgba(255,255,255,.25)}
+.fk{position:absolute;left:54px;right:54px;top:430px;height:240px}
+.fk>div{position:absolute;inset:0;opacity:0;transition:opacity .35s}
+.fk>div.now{opacity:1}
+.fk .k{font-size:130px;line-height:.9;font-weight:900;letter-spacing:-.06em}
+.fk p{font-size:22px;font-weight:600;margin-top:20px}
+.fk p span{color:var(--g);font-weight:500}
+
+/* 7 channels: strips */
+.st{position:absolute;left:54px;right:54px;top:200px;bottom:44px;display:flex;gap:8px}
+.st>div{flex:1;position:relative;background:#f2f2f2;cursor:pointer;overflow:hidden;transition:flex .5s,background .4s}
+.st>div.now{flex:5.2;background:var(--k);color:var(--w)}
+.st .n{position:absolute;left:14px;top:12px;font-size:30px;font-weight:900;letter-spacing:-.04em}
+.st .now .n{color:var(--r);font-size:90px;line-height:.85}
+.st .v{position:absolute;left:18px;bottom:16px;transform-origin:0 100%;transform:rotate(-90deg) translateX(0);white-space:nowrap;font-size:20px;font-weight:800;letter-spacing:-.01em;width:400px;margin-left:24px}
+.st .now .v{display:none}
+.st .x{position:absolute;left:26px;right:26px;bottom:28px;opacity:0;transition:opacity .3s .2s}
+.st .now .x{opacity:1}
+.st .x .ic{width:74px;height:74px;margin-bottom:22px;--isw:2;--ia:var(--r)}
+.st .x b{display:block;font-size:34px;font-weight:800;letter-spacing:-.02em;line-height:1.05;white-space:nowrap}
+.st .x p{font-size:18px;color:#bdbdbd;margin-top:10px;white-space:nowrap}
+
+/* 8 close */
+.ty{position:absolute;left:40px;top:140px;font-size:250px;line-height:.82;font-weight:900;letter-spacing:-.07em}
+.ty em{font-style:normal;color:var(--r)}
+.cr{position:absolute;left:54px;right:54px;bottom:50px;display:grid;grid-template-columns:repeat(5,1fr);border-top:2px solid var(--k)}
+.cr div{padding-top:12px;font-size:20px;font-weight:700}
+</style>
+</head>
+<body>
+<div id="viewport"><main class="stage" id="stage"></main></div>
+<script src="assets/content.js"></script>
+<script src="assets/icons.js"></script>
+<script src="assets/deck.js"></script>
+<script>
+(function () {
+  var Y = C.years, S = [], K = '#111111', R = '#e10600', G = '#8a8a8a';
+  function sl(n, h, t) { S.push('<section class="slide"><div class="grid"></div><div class="top"><span>' + C.org + '</span><span>' + (t || '') + '</span><span>' + ('0' + n).slice(-2) + '</span></div>' + h + '</section>'); }
+
+  /* 1 cover */
+  sl(1, '<div class="circ"></div><div class="ttl">How we built<br>this year</div><p class="sub">Three moves. Nineteen actions. One team.</p><div class="yr">' + Y[1].slice(2, 4) + '/<em>' + Y[1].slice(5) + '</em></div>', 'Annual review');
+
+  /* 2 bump chart */
+  function ranks(k) { var o = C.market.map(function (d, i) { return i; }).sort(function (a, b) { return C.market[b][k] - C.market[a][k] || a - b; }), r = {}; o.forEach(function (i, j) { r[i] = j + 1; }); return r; }
+  var r1 = ranks(1), r2 = ranks(2), bx0 = 150, bx1 = 590, by = function (r) { return 30 + (r - 1) * 80; }, bp = '', top = '';
+  for (var r = 1; r <= 6; r++) bp += '<text x="' + (bx0 - 70) + '" y="' + (by(r) + 7) + '" font-size="20" font-weight="800" fill="' + G + '">' + r + '</text>';
+  C.market.forEach(function (d, i) {
+    var hot = d[0] === 'B', c = hot ? R : K, s = '<path d="M' + bx0 + ' ' + by(r1[i]) + 'C' + (bx0 + 200) + ' ' + by(r1[i]) + ' ' + (bx1 - 200) + ' ' + by(r2[i]) + ' ' + bx1 + ' ' + by(r2[i]) + '" fill="none" stroke="' + c + '" stroke-width="' + (hot ? 10 : 3) + '" stroke-opacity="' + (hot ? 1 : .35) + '"/>' +
+      '<circle cx="' + bx0 + '" cy="' + by(r1[i]) + '" r="' + (hot ? 12 : 8) + '" fill="' + c + '"/><circle cx="' + bx1 + '" cy="' + by(r2[i]) + '" r="' + (hot ? 12 : 8) + '" fill="' + c + '"/>' +
+      '<text x="' + (bx0 - 24) + '" y="' + (by(r1[i]) + 7) + '" text-anchor="end" font-size="20" font-weight="800" fill="' + c + '">' + d[0] + '</text>' +
+      '<text x="' + (bx1 + 24) + '" y="' + (by(r2[i]) + 7) + '" font-size="20" font-weight="800" fill="' + c + '">' + d[0] + ' <tspan font-weight="500" fill="' + G + '">' + d[2] + '</tspan></text>';
+    if (hot) top += s; else bp += s;
+  });
+  bp += '<text x="' + bx0 + '" y="450" text-anchor="middle" font-size="14" font-weight="700">' + Y[0] + '</text><text x="' + bx1 + '" y="450" text-anchor="middle" font-size="14" font-weight="700">' + Y[1] + '</text>';
+  sl(2, '<h2>Ranking <em>changed</em><span class="dot"></span></h2><svg class="ch" viewBox="0 0 740 460">' + bp + top + '</svg>' +
+    '<div class="bigc"><div class="n">2→1</div><p>B rose from second to first, growing from 8 to 14.</p><small>RANK BY VALUE · ' + Y[0] + ' vs ' + Y[1] + '</small></div>', 'Market');
+
+  /* 3 growth bars */
+  var gb = '', gx = 130, gw = 560;
+  C.growth.forEach(function (d, i) {
+    var y = 10 + i * 44, w = d[1] / 20 * gw, hot = d[1] >= 15;
+    gb += '<text x="0" y="' + (y + 22) + '" font-size="16" font-weight="600">' + d[0] + '</text><rect x="' + gx + '" y="' + y + '" width="' + w + '" height="30" fill="' + (hot ? R : K) + '"/>' +
+      '<text x="' + (gx + w + 12) + '" y="' + (y + 22) + '" font-size="17" font-weight="800" fill="' + (hot ? R : K) + '">' + d[1] + '%</text>';
+  });
+  sl(3, '<h2>Every line <em>grew</em><span class="dot"></span></h2><svg class="ch" viewBox="0 0 740 460">' + gb + '</svg>' +
+    '<div class="bigc"><div class="n" style="font-size:150px">5–20%</div><p>Growth across all ten lines. Red marks 15% and above.</p><small>' + C.growthNote.toUpperCase() + ' · REPLACE WITH ACTUALS</small></div>', 'Growth');
+
+  /* 4 three moves */
+  sl(4, '<h2>Three moves<span class="dot"></span></h2><div class="mv">' + C.pillars.map(function (p, i) { return '<div><div class="n">' + (i + 1) + '</div><b>' + p.n + '</b><p>' + p.l + '</p></div>'; }).join('') + '</div>', 'Approach');
+
+  /* 5 team */
+  sl(5, '<div class="gn">' + C.team.map(function (p, i) { return '<div data-at="' + i + '"><div class="n">' + (i + 1) + '</div><div class="k">' + p.k + '</div></div>'; }).join('') + '</div>' +
+    '<div class="tl">' + C.team.map(function (p, i) { return '<div data-at="' + i + '" data-go="' + i + '"><span>0' + (i + 1) + '</span><b>' + p.t + '</b><p>' + p.l + '</p></div>'; }).join('') + '</div>', 'Move 1 · Team');
+
+  /* 6 segments */
+  sl(6, '<h2>Six segment <em>moves</em><span class="dot"></span></h2><div class="sq">' + C.segment.map(function (p, i) { return '<div data-at="' + i + '" data-go="' + i + '"><span>' + (i + 1) + '</span>' + I(p.i) + '</div>'; }).join('') + '</div>' +
+    '<div class="fk">' + C.segment.map(function (p, i) { return '<div data-at="' + i + '"><div class="k">' + p.k + '</div><p>' + p.t + ' <span>— ' + p.l + '</span></p></div>'; }).join('') + '</div>', 'Move 2 · Segments');
+
+  /* 7 channels */
+  sl(7, '<h2>Seven new <em>routes</em><span class="dot"></span></h2><div class="st">' + C.channels.map(function (p, i) {
+    return '<div data-at="' + i + '" data-go="' + i + '"><div class="n">' + (i + 1) + '</div><div class="v">' + p.k + '</div><div class="x">' + I(p.i) + '<b>' + p.t + '</b><p>' + p.l + '</p></div></div>';
+  }).join('') + '</div>', 'Move 3 · Channels');
+
+  /* 8 close */
+  sl(8, '<div class="ty">Thank<br><em>you.</em></div><div class="cr">' + C.credits.map(function (c) { return '<div>' + c + '</div>'; }).join('') + '</div>', 'Built by');
+
+  Deck.render(S);
+})();
+</script>
+</body>
+</html>

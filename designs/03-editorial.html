@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>03 · Editorial</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/deck.css">
+<style>
+:root{--paper:#f4efe6;--ink:#161514;--red:#c8372d;--grey:#6d6a65;--rule:rgba(22,21,20,.18);--serif:'Fraunces',Georgia,serif;--sans:'Inter',system-ui,sans-serif}
+.slide{background:var(--paper);color:var(--ink);font-family:var(--sans)}
+.run{position:absolute;left:72px;right:72px;top:34px;display:flex;justify-content:space-between;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.run i{font-style:normal;color:var(--red)}
+.kick{font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--red)}
+.hl{font-family:var(--serif);font-weight:700;font-size:62px;line-height:1.02;letter-spacing:-.02em;font-variation-settings:"opsz" 144}
+.hl em{font-style:italic;font-weight:400;color:var(--red)}
+.dek{font-family:var(--serif);font-size:22px;line-height:1.4;color:var(--grey);font-style:italic;font-variation-settings:"opsz" 24}
+
+/* 1 cover */
+.mast{position:absolute;left:66px;top:62px;font-family:var(--serif);font-size:210px;line-height:.8;font-weight:800;letter-spacing:-.05em;font-variation-settings:"opsz" 144}
+.mast em{font-style:italic;font-weight:300;color:var(--red)}
+.cvart{position:absolute;right:-60px;top:150px;width:640px;height:640px}
+.cvart .rot{transform-origin:320px 320px;animation:spin 80s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.lines{position:absolute;left:72px;top:300px;width:470px}
+.lines div{padding:16px 0;border-top:1px solid var(--rule)}
+.lines b{display:block;font-family:var(--serif);font-size:30px;line-height:1.1;font-weight:600}
+.lines span{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
+.issue{position:absolute;left:72px;bottom:46px;font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+
+/* 2 contents */
+.ct{position:absolute;left:72px;top:96px}
+.ct .hl{font-size:110px}
+.toc{position:absolute;left:72px;right:72px;top:300px;display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.toc>div{border-top:3px solid var(--ink);padding-top:18px}
+.toc .pg{font-family:var(--serif);font-size:84px;line-height:.9;font-weight:300;color:var(--red)}
+.toc .ic{width:54px;height:54px;margin:18px 0 14px;--isw:1.8;--ia:rgba(200,55,45,.18)}
+.toc b{display:block;font-family:var(--serif);font-size:28px;line-height:1.1}
+.toc p{font-size:17px;color:var(--grey);margin-top:8px;line-height:1.45}
+
+/* 3/4 analysis */
+.an{position:absolute;left:72px;top:96px;width:380px}
+.an .hl{font-size:52px;margin:14px 0 18px}
+.an .dek{font-size:20px}
+.an .fn{margin-top:22px;font-size:12px;color:var(--grey);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.fig{position:absolute;left:480px;right:72px;top:110px;bottom:60px}
+.fig svg{width:100%;height:100%}
+.fig text{font-family:var(--sans)}
+.cap{position:absolute;left:480px;bottom:34px;font-size:12px;color:var(--grey);letter-spacing:.06em}
+
+/* 5 team feature */
+.pq{position:absolute;left:72px;top:96px;width:470px}
+.pq blockquote{font-family:var(--serif);font-size:44px;line-height:1.12;font-style:italic;font-weight:400;font-variation-settings:"opsz" 144}
+.pq blockquote::before{content:"“";display:block;font-size:120px;line-height:.6;color:var(--red);font-style:normal;margin-bottom:6px}
+.photo{position:absolute;left:72px;top:400px;width:470px;height:250px;background:#e6dfd2;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo .ph{position:absolute;inset:0;display:none;place-items:center;text-align:center;color:var(--grey);font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.photo.none img{display:none}
+.photo.none .ph{display:grid}
+.photo .ph .ic{width:70px;height:70px;margin:0 auto 10px;--isw:1.6}
+.photo figcaption{position:absolute;left:0;bottom:-24px;font-size:12px;color:var(--grey)}
+.ls{position:absolute;left:610px;right:72px;top:100px}
+.ls .kick{display:block;margin-bottom:12px}
+.it{display:grid;grid-template-columns:64px 1fr;padding:14px 0;border-top:1px solid var(--rule);cursor:pointer}
+.it .n{font-family:var(--serif);font-size:40px;line-height:.9;font-weight:300;color:var(--rule);transition:color .3s}
+.it b{font-family:var(--serif);font-size:23px;font-weight:500;line-height:1.2;color:var(--grey);transition:all .3s}
+.it p{grid-column:2;max-height:0;overflow:hidden;font-size:17px;color:var(--ink);transition:max-height .4s,margin .4s}
+.it.now .n{color:var(--red)}
+.it.now b{color:var(--ink);font-weight:700;font-size:27px}
+.it.now p{max-height:60px;margin-top:6px}
+
+/* 6 segments field guide */
+.fg{position:absolute;left:72px;right:72px;top:250px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{position:relative;height:186px;padding:22px 24px;border:1.5px solid var(--ink);cursor:pointer;transition:background .35s,color .35s}
+.card .ic{position:absolute;right:20px;top:20px;width:52px;height:52px;--isw:1.8;--ia:rgba(200,55,45,.2)}
+.card .n{font-family:var(--serif);font-size:15px;font-style:italic;color:var(--red)}
+.card b{display:block;font-family:var(--serif);font-size:32px;line-height:1;margin-top:46px}
+.card span{display:block;font-size:14px;color:var(--grey);margin-top:8px}
+.card p{display:none;font-size:15px;margin-top:6px}
+.card.now{background:var(--ink);color:var(--paper)}
+.card.now .ic{color:var(--paper);--ia:var(--red)}
+.card.now span{display:none}
+.card.now p{display:block;color:rgba(244,239,230,.85)}
+.hd6{position:absolute;left:72px;top:96px;right:72px;display:flex;justify-content:space-between;align-items:flex-end}
+.hd6 .dek{max-width:420px;text-align:right}
+
+/* 7 channels */
+.big{position:absolute;left:52px;top:80px;width:470px;height:600px}
+.big>div{position:absolute;inset:0;opacity:0;transition:opacity .4s}
+.big>div.now{opacity:1}
+.big .g{font-family:var(--serif);font-size:400px;line-height:1;font-weight:300;color:var(--red);letter-spacing:-.06em;font-variation-settings:"opsz" 144}
+.big .ic{position:absolute;left:24px;bottom:66px;width:84px;height:84px;--isw:1.6;--ia:rgba(200,55,45,.2)}
+.big p{position:absolute;left:24px;bottom:20px;right:0;font-family:var(--serif);font-size:22px;font-style:italic;color:var(--grey)}
+.rl{position:absolute;left:560px;right:72px;top:100px}
+.rl .hl{font-size:46px;margin:12px 0 22px}
+.rw{display:flex;gap:18px;align-items:baseline;padding:11px 0;border-top:1px solid var(--rule);cursor:pointer}
+.rw span{font-family:var(--serif);font-size:20px;color:var(--grey);width:26px}
+.rw b{font-family:var(--serif);font-size:24px;font-weight:500;color:var(--grey);transition:all .3s}
+.rw.now span{color:var(--red)}
+.rw.now b{color:var(--ink);font-weight:700}
+
+/* 8 back page */
+.note{position:absolute;left:250px;right:250px;top:110px;text-align:center}
+.note .hl{font-size:84px;margin:18px 0 24px}
+.note .dek{font-size:26px}
+.sig{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:44px}
+.sig span{font-family:var(--serif);font-style:italic;font-size:24px;padding:0 14px;border-right:1px solid var(--rule)}
+.sig span:last-child{border:0}
+.orn{display:block;width:120px;margin:34px auto 0}
+</style>
+</head>
+<body>
+<div id="viewport"><main class="stage" id="stage"></main></div>
+<script src="assets/content.js"></script>
+<script src="assets/icons.js"></script>
+<script src="assets/deck.js"></script>
+<script>
+(function () {
+  var Y = C.years, S = [], RED = '#c8372d', INK = '#161514', GREY = '#6d6a65';
+  function sl(p, h) { S.push('<section class="slide"><div class="run"><span>The Year · ' + Y[1] + '</span><span>' + C.org + '</span><span><i>p.</i> ' + p + '</span></div>' + h + '</section>'); }
+
+  /* 1 cover */
+  var rings = '';
+  for (var i = 0; i < 12; i++) rings += '<path d="M320 320C360 230 470 190 560 240" fill="none" stroke="' + (i % 3 ? INK : RED) + '" stroke-width="' + (i % 3 ? 3 : 10) + '" stroke-linecap="round" transform="rotate(' + i * 30 + ' 320 320)"/>';
+  S.push('<section class="slide"><div class="mast">The <em>Year</em></div>' +
+    '<svg class="cvart" viewBox="0 0 640 640"><circle cx="320" cy="320" r="300" fill="none" stroke="' + INK + '" stroke-width="2"/><circle cx="320" cy="320" r="270" fill="none" stroke="' + INK + '" stroke-width="1" stroke-dasharray="2 8"/><g class="rot">' + rings + '</g><circle cx="320" cy="320" r="56" fill="' + RED + '"/><circle cx="320" cy="320" r="18" fill="' + 'var(--paper)' + '"/></svg>' +
+    '<div class="lines"><div><span>Analysis</span><b>How B overtook A</b></div><div><span>Growth</span><b>Ten lines, all growing</b></div><div><span>Special report</span><b>The team, the segments and the channels behind it</b></div></div>' +
+    '<div class="issue">' + C.org + ' · Issue ' + Y[1] + '</div></section>');
+
+  /* 2 contents */
+  var pages = [5, 6, 7];
+  sl('02', '<div class="ct"><div class="kick">In this issue</div><div class="hl">Three <em>features</em></div></div>' +
+    '<div class="toc">' + C.pillars.map(function (p, i) { return '<div><div class="pg">' + ('0' + pages[i]) + '</div>' + I(p.i) + '<b>' + p.n + '</b><p>' + p.l + '</p></div>'; }).join('') + '</div>');
+
+  /* 3 standings: dumbbell */
+  var W = 728, x0 = 70, x1 = 700, sc = function (v) { return x0 + v / 15 * (x1 - x0); }, db = '';
+  [0, 5, 10, 15].forEach(function (t) { db += '<path d="M' + sc(t) + ' 30V510" stroke="' + INK + '" stroke-opacity=".12"/><text x="' + sc(t) + '" y="18" text-anchor="middle" font-size="13" fill="' + GREY + '">' + t + '</text>'; });
+  C.market.forEach(function (d, i) {
+    var y = 70 + i * 84, hot = d[0] === 'B', c = hot ? RED : INK;
+    db += '<text x="0" y="' + (y + 8) + '" font-family="Fraunces" font-size="30" font-weight="700" fill="' + c + '">' + d[0] + '</text>' +
+      '<path d="M' + sc(d[1]) + ' ' + y + 'H' + sc(d[2]) + '" stroke="' + c + '" stroke-width="' + (hot ? 6 : 3) + '" stroke-opacity="' + (hot ? 1 : .5) + '"/>' +
+      '<circle cx="' + sc(d[1]) + '" cy="' + y + '" r="10" fill="var(--paper)" stroke="' + c + '" stroke-width="3"/><circle cx="' + sc(d[2]) + '" cy="' + y + '" r="10" fill="' + c + '"/>' +
+      '<text x="' + sc(d[2]) + '" y="' + (y - 18) + '" text-anchor="middle" font-size="14" font-weight="700" fill="' + c + '">' + d[2] + '</text>' +
+      (d[1] !== d[2] ? '<text x="' + sc(d[1]) + '" y="' + (y - 18) + '" text-anchor="middle" font-size="14" fill="' + GREY + '">' + d[1] + '</text>' : '');
+  });
+  sl('03', '<div class="an"><div class="kick">Analysis</div><div class="hl">How B <em>overtook</em> A</div><p class="dek">B grew from 8 to 14 and took first place. A slipped from 10 to 6; D doubled and C halved.</p>' +
+    '<div class="fn">○ ' + Y[0] + ' &nbsp; ● ' + Y[1] + '</div></div><div class="fig"><svg viewBox="0 0 ' + W + ' 530">' + db + '</svg></div>');
+
+  /* 4 growth: lollipops */
+  var lp = '', gx = 110, gw = 520;
+  [0, 5, 10, 15, 20].forEach(function (t) { lp += '<path d="M' + (gx + t / 20 * gw) + ' 22V500" stroke="' + INK + '" stroke-opacity=".12"/><text x="' + (gx + t / 20 * gw) + '" y="12" text-anchor="middle" font-size="13" fill="' + GREY + '">' + t + '%</text>'; });
+  C.growth.forEach(function (d, i) {
+    var y = 44 + i * 48, x = gx + d[1] / 20 * gw, hot = i < 3;
+    lp += '<text x="0" y="' + (y + 5) + '" font-size="16" fill="' + INK + '">' + d[0] + '</text><path d="M' + gx + ' ' + y + 'H' + x + '" stroke="' + (hot ? RED : INK) + '" stroke-width="' + (hot ? 4 : 2) + '"/>' +
+      '<circle cx="' + x + '" cy="' + y + '" r="' + (hot ? 9 : 7) + '" fill="' + (hot ? RED : INK) + '"/><text x="' + (x + 18) + '" y="' + (y + 5) + '" font-size="16" font-weight="700" fill="' + (hot ? RED : INK) + '">+' + d[1] + '%</text>';
+  });
+
+  sl('04', '<div class="an"><div class="kick">Growth</div><div class="hl">Ten lines, <em>all</em> growing</div><p class="dek">Every line grew, from 5% at the slowest to 20% at the fastest.</p><div class="fn">' + C.growthNote + ' · replace with actuals</div></div><div class="fig"><svg viewBox="0 0 728 530">' + lp + '</svg></div>');
+
+  /* 5 feature I: team */
+  sl('05', '<div class="pq"><div class="kick">Feature I · ' + C.pillars[0].n + '</div><blockquote style="margin-top:16px">' + C.pillars[0].l + '</blockquote></div>' +
+    '<figure class="photo"><img src="../team-photo.jpg" alt="Our team" onerror="this.parentNode.classList.add(\'none\')"><div class="ph"><div>' + I('team') + 'Team photo<br>save as team-photo.jpg</div></div></figure>' +
+    '<div class="ls"><span class="kick">Six things we did</span>' + C.team.map(function (p, i) { return '<div class="it" data-at="' + i + '" data-go="' + i + '"><span class="n">' + (i + 1) + '</span><b>' + p.t + '</b><p>' + p.l + '</p></div>'; }).join('') + '</div>');
+
+  /* 6 feature II: segments */
+  sl('06', '<div class="hd6"><div><div class="kick">Feature II · ' + C.pillars[1].n + '</div><div class="hl" style="margin-top:12px">A field guide to <em>six moves</em></div></div><p class="dek">' + C.pillars[1].l + '</p></div>' +
+    '<div class="fg">' + C.segment.map(function (p, i) { return '<div class="card" data-at="' + i + '" data-go="' + i + '">' + I(p.i) + '<span class="n">No. ' + (i + 1) + '</span><b>' + p.k + '</b><span>' + p.t + '</span><p>' + p.l + '</p></div>'; }).join('') + '</div>');
+
+  /* 7 feature III: channels */
+  sl('07', '<div class="big">' + C.channels.map(function (p, i) { return '<div data-at="' + i + '"><div class="g">' + (i + 1) + '</div>' + I(p.i) + '<p>' + p.l + '</p></div>'; }).join('') + '</div>' +
+    '<div class="rl"><div class="kick">Feature III · ' + C.pillars[2].n + '</div><div class="hl">Seven new ways <em>in</em></div>' +
+    C.channels.map(function (p, i) { return '<div class="rw" data-at="' + i + '" data-go="' + i + '"><span>' + (i + 1) + '</span><b>' + p.t + '</b></div>'; }).join('') + '</div>');
+
+  /* 8 back page */
+  sl('08', '<div class="note"><div class="kick">Editor’s note</div><div class="hl">To everyone who <em>built</em> this year</div><p class="dek">Thank you. Every page of this issue was written in the field, at the counter and on site, by you.</p>' +
+    '<div class="sig">' + C.credits.map(function (c) { return '<span>' + c + '</span>'; }).join('') + '</div>' +
+    '<svg class="orn" viewBox="0 0 120 20"><path d="M0 10H48M72 10H120" stroke="' + INK + '" stroke-width="1.5"/><circle cx="60" cy="10" r="6" fill="' + RED + '"/></svg></div>');
+
+  Deck.render(S);
+})();
+</script>
+</body>
+</html>

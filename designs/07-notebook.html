@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>07 · Notebook</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/deck.css">
+<style>
+:root{--paper:#fdfaf1;--ink:#2b2d42;--pen:#2b59c3;--red:#e63946;--hi:#ffe066;--grn:#8ac926;--pnk:#ff99c8;--yel:#fff3a3}
+.slide{background-color:var(--paper);color:var(--ink);font-family:'Kalam',cursive;
+  background-image:linear-gradient(90deg,transparent 98px,rgba(230,57,70,.45) 98px,rgba(230,57,70,.45) 100px,transparent 100px),repeating-linear-gradient(transparent 0 35px,rgba(43,89,195,.16) 35px 36px)}
+.hand{font-family:'Caveat',cursive}
+.hd{position:absolute;left:130px;top:34px;font-family:'Caveat';font-size:64px;font-weight:700;line-height:1}
+.hd .mk{background:linear-gradient(transparent 55%,rgba(255,224,102,.85) 55% 90%,transparent 90%);padding:0 6px}
+.pg{position:absolute;right:40px;top:30px;font-family:'Caveat';font-size:28px;color:var(--pen)}
+.rough{filter:url(#nbR)}
+.tape{position:absolute;width:110px;height:30px;background:rgba(255,255,255,.55);box-shadow:0 1px 2px rgba(0,0,0,.08);border-left:2px dashed rgba(0,0,0,.06);border-right:2px dashed rgba(0,0,0,.06)}
+
+/* 1 cover */
+.cv{position:absolute;left:140px;top:150px;width:660px}
+.cv h1{font-family:'Caveat';font-size:132px;line-height:.9;font-weight:700}
+.cv h1 span{color:var(--red)}
+.cv p{font-size:26px;color:var(--pen);margin-top:24px}
+.doodle{position:absolute;right:70px;top:120px;width:440px;height:440px}
+.sticky{position:absolute;width:250px;padding:26px 22px 20px;background:var(--yel);box-shadow:0 10px 18px -8px rgba(0,0,0,.25);font-family:'Caveat';font-size:34px;line-height:1.05;transform:rotate(-4deg)}
+
+/* charts */
+.ch{position:absolute;left:120px;top:140px;width:760px;height:520px}
+.ch svg path,.ch svg circle,.ch svg rect{filter:url(#nbR)}
+.ch .yr{font-family:'Caveat';font-size:28px;font-weight:700}
+.ann{position:absolute;font-family:'Caveat';font-size:36px;line-height:1.05;color:var(--red);font-weight:700}
+.ann svg{position:absolute;overflow:visible}
+
+/* 4 three notes */
+.three{position:absolute;left:150px;right:80px;top:180px;display:grid;grid-template-columns:repeat(3,1fr);gap:46px}
+.note{position:relative;height:340px;padding:44px 28px 24px;box-shadow:0 14px 22px -10px rgba(0,0,0,.28)}
+.note .tape{left:50%;top:-14px;margin-left:-55px;transform:rotate(-3deg)}
+.note .ic{width:76px;height:76px;margin-bottom:16px;--isw:2.4;--ia:rgba(255,255,255,.6);filter:url(#nbR)}
+.note b{display:block;font-family:'Caveat';font-size:44px;line-height:.95;font-weight:700}
+.note p{font-size:19px;margin-top:12px;line-height:1.3}
+
+/* 5 team stickies */
+.board{position:absolute;left:140px;right:60px;top:150px;display:grid;grid-template-columns:repeat(3,1fr);gap:30px 34px}
+.st{position:relative;height:230px;padding:22px 22px 18px;box-shadow:0 10px 16px -10px rgba(0,0,0,.3);cursor:pointer;transition:transform .45s,opacity .45s,box-shadow .45s;opacity:.5}
+.st .ic{position:absolute;right:16px;top:16px;width:54px;height:54px;--isw:2.4;--ia:rgba(255,255,255,.6);filter:url(#nbR)}
+.st .n{font-family:'Caveat';font-size:30px;color:var(--pen);font-weight:700}
+.st b{display:block;font-family:'Caveat';font-size:46px;line-height:.95;font-weight:700;margin-top:4px}
+.st span{display:block;font-size:16px;line-height:1.25;margin-top:8px}
+.st p{display:none;font-size:16px;color:var(--pen);margin-top:6px;line-height:1.25}
+.st.now{opacity:1;transform:rotate(0) scale(1.08)!important;box-shadow:0 24px 34px -14px rgba(0,0,0,.4);z-index:2}
+.st.now p{display:block}
+.st.now span{display:none}
+
+/* 6 checklist */
+.cl{position:absolute;left:130px;top:150px;width:1000px}
+.ci{position:relative;display:grid;grid-template-columns:70px 1fr;height:84px;cursor:pointer}
+.ci svg.box{width:46px;height:46px;overflow:visible}
+.ci .tick{stroke-dasharray:90;stroke-dashoffset:90;transition:stroke-dashoffset .5s}
+.ci.in .tick{stroke-dashoffset:0}
+.ci b{font-size:30px;font-weight:700;line-height:1.1;color:#8a8b98;transition:color .3s}
+.ci.in b{color:var(--ink)}
+.ci p{font-family:'Caveat';font-size:28px;color:var(--pen);display:none;line-height:1}
+.ci.now p{display:block}
+.ci .ring{position:absolute;left:52px;top:-12px;height:70px;opacity:0;pointer-events:none}
+.ci.now .ring{opacity:1}
+
+/* 7 mind map */
+.mm{position:absolute;left:0;top:0;width:1280px;height:720px}
+.mm .br{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;filter:url(#nbR);opacity:.4;transition:all .3s}
+.mm .br.now{stroke:var(--red);stroke-width:5;opacity:1}
+.bub{position:absolute;transform:translate(-50%,-50%);padding:10px 20px;border:2.5px solid var(--ink);border-radius:46% 54% 50% 50%/55% 45% 55% 45%;background:var(--paper);font-family:'Caveat';font-size:34px;font-weight:700;white-space:nowrap;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all .3s}
+.bub .ic{width:34px;height:34px;--isw:2.6;--ia:var(--hi)}
+.bub.now{background:var(--hi);border-color:var(--red);transform:translate(-50%,-50%) scale(1.15) rotate(-2deg)}
+.core{position:absolute;left:640px;top:380px;transform:translate(-50%,-50%) rotate(-3deg);padding:24px 36px;background:var(--pnk);font-family:'Caveat';font-size:50px;font-weight:700;box-shadow:0 10px 16px -8px rgba(0,0,0,.3)}
+.mn{position:absolute;left:130px;top:600px;width:430px;height:90px}
+.mn>div{position:absolute;inset:0;opacity:0;transition:opacity .3s}
+.mn>div.now{opacity:1}
+.mn b{font-size:22px}
+.mn p{font-family:'Caveat';font-size:30px;color:var(--pen);line-height:1}
+
+/* 8 close */
+.ty{position:absolute;left:0;right:0;top:150px;text-align:center;font-family:'Caveat';font-size:170px;font-weight:700;line-height:.9}
+.ty span{color:var(--red)}
+.sigs{position:absolute;left:150px;right:80px;top:450px;display:flex;justify-content:space-around;font-family:'Caveat';font-size:44px;font-weight:700}
+.sigs span:nth-child(odd){transform:rotate(-4deg)}
+.sigs span:nth-child(even){transform:rotate(3deg)}
+.hearts{position:absolute;left:0;top:0;width:1280px;height:720px;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="viewport"><main class="stage" id="stage"></main></div>
+<script src="assets/content.js"></script>
+<script src="assets/icons.js"></script>
+<script src="assets/deck.js"></script>
+<script>
+(function () {
+  var Y = C.years, S = [], INK = '#2b2d42', PEN = '#2b59c3', RED = '#e63946';
+  var NOTES = ['#fff3a3', '#ffc8dd', '#caf0b4', '#bde0fe', '#ffd6a5', '#e2c7ff'];
+  Deck.defs('<filter id="nbR"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="3.2"/></filter>' +
+    '<pattern id="nbH" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><path d="M0 4.5H9" stroke="' + RED + '" stroke-width="3.2"/></pattern>' +
+    '<pattern id="nbB" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><path d="M0 4.5H9" stroke="' + PEN + '" stroke-width="2.4"/></pattern>');
+  function sl(n, h) { S.push('<section class="slide"><div class="pg">p.' + n + '</div>' + h + '</section>'); }
+  function hd(t) { return '<div class="hd">' + t + '</div>'; }
+  function rot(i) { return [-3, 2, -1.5, 2.5, -2, 1.5, -2.5][i % 7]; }
+
+  /* 1 cover */
+  var d = '<g class="rough" fill="none" stroke="' + INK + '" stroke-width="4" stroke-linecap="round"><circle cx="210" cy="230" r="150"/><circle cx="210" cy="230" r="34" fill="' + 'rgba(255,224,102,.8)' + '"/>';
+  for (var i = 0; i < 6; i++) d += '<path d="M210 196C240 140 300 120 340 150" transform="rotate(' + i * 60 + ' 210 230)"/>';
+  d += '<path d="M60 230H10M360 230h60v-80" /><path d="M420 150c-8 14-12 22-12 28a12 12 0 0 0 24 0c0-6-4-14-12-28z" stroke="' + PEN + '" fill="rgba(43,89,195,.25)"/>' +
+    '<path d="M90 410c60-10 180-10 240 0" stroke="' + RED + '"/></g>';
+  sl(1, '<div class="cv"><h1>How we built <span>this year</span></h1><p>Notes from the team, the counters and the field.</p></div>' +
+    '<svg class="doodle" viewBox="0 0 440 440">' + d + '</svg>' +
+    '<div class="sticky" style="left:690px;top:520px">No numbers here.<br>Just how we did it!<div class="tape" style="left:70px;top:-14px;transform:rotate(4deg)"></div></div>');
+
+  /* 2 scoreboard */
+  var mk = Deck.slope(C.market, { w: 760, h: 500, x1: 180, x2: 580, years: Y, ink: INK, sub: PEN, axis: INK, fs: 26, font: 'Caveat', hi: 1, r: 8, gap: 30,
+    color: function (d, i) { return i === 1 ? RED : i === 0 ? PEN : '#9a9bab'; }, width: function (d, i) { return i < 2 ? 5 : 3; } });
+  sl(2, hd('The <span class="mk">scoreboard</span> we drew') + '<div class="ch">' + mk + '</div>' +
+    '<div class="ann" style="left:900px;top:170px">B jumped<br>to the top!<br><span style="color:' + PEN + ';font-size:28px">8 → 14</span><svg width="100" height="60" style="left:-120px;top:20px"><path class="rough" d="M95 10C60 0 30 10 8 40M8 40l3-16M8 40l15-4" fill="none" stroke="' + RED + '" stroke-width="3.5" stroke-linecap="round"/></svg></div>' +
+    '<div class="ann" style="left:900px;top:420px;color:' + PEN + '">A slipped<br>10 → 6</div>');
+
+  /* 3 growth bars */
+  var gb = '', bw = 54;
+  C.growth.forEach(function (d, i) {
+    var x = 40 + i * 70, h = d[1] / 20 * 330, y = 420 - h;
+    gb += '<rect x="' + x + '" y="' + y + '" width="' + bw + '" height="' + h + '" fill="url(#' + (i < 3 ? 'nbH' : 'nbB') + ')" stroke="' + (i < 3 ? RED : PEN) + '" stroke-width="3" class="rough"/>' +
+      '<text x="' + (x + bw / 2) + '" y="' + (y - 12) + '" text-anchor="middle" font-family="Caveat" font-size="30" font-weight="700" fill="' + (i < 3 ? RED : INK) + '">+' + d[1] + '%</text>' +
+      '<text x="' + (x + bw / 2) + '" y="452" text-anchor="middle" font-family="Caveat" font-size="22" fill="' + INK + '">' + d[0].replace('Line ', 'L') + '</text>';
+  });
+  gb += '<path class="rough" d="M20 422H730" stroke="' + INK + '" stroke-width="3"/>';
+  sl(3, hd('All <span class="mk">ten lines</span> grew') + '<div class="ch"><svg viewBox="0 0 760 500">' + gb + '</svg></div>' +
+    '<div class="ann" style="left:920px;top:200px">every single<br>one went up</div><div class="ann" style="left:920px;top:380px;font-size:26px;color:' + PEN + '">(' + C.growthNote.toLowerCase() + ',<br>swap in real ones)</div>');
+
+  /* 4 three things */
+  sl(4, hd('Three things that <span class="mk">worked</span>') + '<div class="three">' + C.pillars.map(function (p, i) {
+    return '<div class="note" style="background:' + NOTES[i] + ';transform:rotate(' + rot(i) + 'deg)"><div class="tape"></div>' + I(p.i) + '<b>' + p.n + '</b><p>' + p.l + '</p></div>';
+  }).join('') + '</div>');
+
+  /* 5 team board */
+  sl(5, hd('Team: <span class="mk">six habits</span>') + '<div class="board">' + C.team.map(function (p, i) {
+    return '<div class="st" data-at="' + i + '" data-go="' + i + '" style="background:' + NOTES[i] + ';transform:rotate(' + rot(i) + 'deg)">' + I(p.i) + '<div class="n">#' + (i + 1) + '</div><b>' + p.k + '</b><span>' + p.t + '</span><p>' + p.l + '</p></div>';
+  }).join('') + '</div>');
+
+  /* 6 checklist */
+  sl(6, hd('Segments: <span class="mk">the checklist</span>') + '<div class="cl">' + C.segment.map(function (p, i) {
+    var w = p.t.length * 15 + 40;
+    return '<div class="ci" data-at="' + i + '" data-go="' + i + '"><svg class="box" viewBox="0 0 46 46"><rect class="rough" x="4" y="6" width="34" height="34" rx="3" fill="none" stroke="' + INK + '" stroke-width="3"/>' +
+      '<path class="tick" d="M8 24l10 12L44 0" fill="none" stroke="' + RED + '" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+      '<div><b>' + p.t + '</b><p>→ ' + p.l + '</p></div>' +
+      '<svg class="ring" width="' + w + '" height="70" viewBox="0 0 ' + w + ' 70"><ellipse class="rough" cx="' + w / 2 + '" cy="30" rx="' + (w / 2 - 4) + '" ry="26" fill="none" stroke="' + RED + '" stroke-width="3" transform="rotate(-1.5 ' + w / 2 + ' 30)"/></svg></div>';
+  }).join('') + '</div>');
+
+  /* 7 mind map */
+  var ang = [-160, -110, -70, -20, 20, 160, 90], cx = 640, cy = 380, br = '', bb = '';
+  C.channels.forEach(function (p, i) {
+    var a = ang[i] * Math.PI / 180, x = Math.round(cx + 430 * Math.cos(a)), y = Math.round(cy + 215 * Math.sin(a)), qx = (cx + x) / 2 + (i % 2 ? 40 : -40), qy = (cy + y) / 2 + (i % 2 ? -30 : 30);
+    br += '<path class="br" data-at="' + i + '" d="M' + cx + ' ' + cy + 'Q' + qx + ' ' + qy + ' ' + x + ' ' + y + '"/>';
+    bb += '<div class="bub" data-at="' + i + '" data-go="' + i + '" style="left:' + x + 'px;top:' + y + 'px">' + I(p.i) + p.k + '</div>';
+  });
+  sl(7, hd('Channels: <span class="mk">where else?</span>') + '<svg class="mm" viewBox="0 0 1280 720">' + br + '</svg><div class="core">Channels</div>' + bb +
+    '<div class="mn">' + C.channels.map(function (p, i) { return '<div data-at="' + i + '"><b>' + p.t + '</b><p>' + p.l + '</p></div>'; }).join('') + '</div>');
+
+  /* 8 close */
+  var hs = '';
+  [[200, 120, 1], [1080, 140, 1.4], [170, 560, 1.2], [1110, 560, .9], [640, 640, 1.1]].forEach(function (h, i) {
+    hs += '<path class="rough" transform="translate(' + h[0] + ' ' + h[1] + ') scale(' + h[2] + ') rotate(' + (i * 9 - 12) + ')" d="M0 14C-18 2-18-14-6-16 0-17 0-10 0-8 0-10 0-17 6-16 18-14 18 2 0 14z" fill="' + [RED, '#ff99c8', RED, '#ff99c8', RED][i] + '" stroke="' + INK + '" stroke-width="2"/>';
+  });
+  sl(8, '<svg class="hearts" viewBox="0 0 1280 720">' + hs + '</svg><div class="ty">Thank you,<br><span>team!</span></div><div class="sigs">' +
+    C.credits.map(function (c, i) { return '<span style="color:' + [PEN, RED, INK, '#2a9d8f', '#9b5de5'][i] + '">' + c + '</span>'; }).join('') + '</div>');
+
+  Deck.render(S);
+})();
+</script>
+</body>
+</html>

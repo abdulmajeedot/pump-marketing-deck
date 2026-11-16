@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>05 · Metro</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/deck.css">
+<style>
+:root{--bg:#f6f5f0;--k:#1d1d1f;--g:#7c7c80;--t:#00a19a;--o:#f28c28;--p:#7b3fa0;--y:#ffb000}
+.slide{background:var(--bg);color:var(--k);font-family:'Manrope',sans-serif}
+.hd{position:absolute;left:70px;top:52px;display:flex;align-items:center;gap:18px}
+.bul{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:24px;flex:none}
+.hd h2{font-size:44px;font-weight:800;letter-spacing:-.02em;line-height:1.05}
+.hd small{display:block;font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--g);margin-bottom:4px}
+.map{position:absolute;left:50px;top:170px;width:1180px;height:500px}
+.map text{font-family:'Manrope'}
+
+/* 1 cover */
+.cv{position:absolute;left:70px;top:150px;width:520px}
+.cv h1{font-size:78px;font-weight:800;line-height:1;letter-spacing:-.03em;margin:20px 0}
+.cv p{font-size:22px;color:var(--g);font-weight:500}
+.cv .ln{display:flex;gap:10px;margin-top:40px}
+.cv .ln span{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;padding:8px 14px 8px 8px;border-radius:999px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.cv .ln i{width:22px;height:22px;border-radius:50%}
+.cvmap{position:absolute;right:0;top:0;width:700px;height:720px}
+
+/* ride */
+.ride{position:absolute;left:0;top:0;width:1280px;height:720px}
+.rail{position:absolute;left:80px;right:80px;top:300px;height:14px;border-radius:7px}
+.stn{position:absolute;top:290px;width:34px;height:34px;margin-left:-17px;border-radius:50%;background:#fff;border:6px solid var(--k);cursor:pointer;transition:background .35s}
+.stn.in{background:var(--lc)}
+.stn.now{transform:scale(1.25)}
+.sn{position:absolute;top:226px;width:160px;margin-left:-80px;text-align:center;font-size:15px;font-weight:700;color:var(--g);transition:color .3s}
+.sn.now{color:var(--k);font-weight:800}
+.train{position:absolute;top:252px;width:96px;height:34px;margin-left:-48px;border-radius:17px;background:var(--k);color:#fff;font-size:12px;font-weight:800;letter-spacing:.1em;display:grid;place-items:center;transition:left .6s cubic-bezier(.6,.05,.3,1)}
+.train::after{content:"";position:absolute;left:50%;bottom:-8px;margin-left:-8px;border:8px solid transparent;border-bottom:0;border-top-color:var(--k)}
+.sign{position:absolute;left:80px;right:80px;top:380px;height:250px}
+.sign>div{position:absolute;inset:0;display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:center;background:#fff;border-radius:14px;padding:0 44px;box-shadow:0 10px 30px rgba(0,0,0,.07);border-top:14px solid var(--lc);opacity:0;transform:translateY(10px);transition:opacity .4s,transform .4s}
+.sign>div.now{opacity:1;transform:none}
+.sign .ic{width:150px;height:150px;color:var(--lc);--isw:1.8;--ia:color-mix(in srgb,var(--lc) 18%,transparent)}
+.sign small{font-size:14px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--lc)}
+.sign b{display:block;font-size:40px;font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:8px 0 10px}
+.sign p{font-size:22px;color:var(--g);font-weight:500}
+
+/* market, board */
+.mk{position:absolute;left:60px;top:170px;width:760px;height:480px}
+.mk .yr{font-size:14px;font-weight:800;letter-spacing:.14em}
+.side{position:absolute;left:880px;right:70px;top:230px}
+.side .bul{width:120px;height:120px;font-size:64px;background:var(--o)}
+.side p{font-size:24px;font-weight:600;margin-top:24px;line-height:1.35}
+.side small{display:block;font-size:14px;color:var(--g);margin-top:12px}
+.board{position:absolute;left:70px;right:70px;top:160px;bottom:56px;background:#17181a;border-radius:16px;padding:22px 34px;color:var(--y);font-family:'Manrope';box-shadow:inset 0 0 0 6px #2a2b2e}
+.board .r{display:grid;grid-template-columns:70px 150px 1fr 110px;align-items:center;height:44px;border-bottom:1px solid #2c2d30;font-size:20px;font-weight:700}
+.board .r.h{color:#8d8f94;font-size:12px;letter-spacing:.18em;height:30px}
+.board .pl{display:grid;place-items:center;width:34px;height:28px;border-radius:5px;background:#2c2d30;color:#fff;font-size:15px}
+.board .bk{display:flex;gap:4px}
+.board .bk i{width:16px;height:18px;border-radius:3px;background:var(--y)}
+.board .v{text-align:right;font-size:24px;font-weight:800}
+.note{position:absolute;right:86px;top:120px;font-size:13px;font-weight:800;letter-spacing:.14em;color:var(--g);text-transform:uppercase}
+
+/* close ticket */
+.tk{position:absolute;left:190px;right:190px;top:150px;height:400px;background:#fff;border-radius:22px;box-shadow:0 20px 50px rgba(0,0,0,.09);display:grid;grid-template-columns:1fr 280px;overflow:hidden}
+.tk .l{padding:50px 56px;border-right:3px dashed #d8d6cf;position:relative}
+.tk .l small{font-size:14px;font-weight:800;letter-spacing:.16em;color:var(--g);text-transform:uppercase}
+.tk .l h1{font-size:84px;font-weight:800;letter-spacing:-.03em;line-height:1;margin:16px 0}
+.tk .l p{font-size:20px;color:var(--g);font-weight:500}
+.tk .bars{display:flex;height:16px;margin-top:40px;border-radius:8px;overflow:hidden}
+.tk .bars i{flex:1}
+.tk .r{padding:50px 34px;background:var(--k);color:#fff}
+.tk .r small{font-size:12px;font-weight:800;letter-spacing:.18em;color:#9a9a9e}
+.tk .r div{font-size:20px;font-weight:700;margin:12px 0 20px;line-height:1.5}
+</style>
+</head>
+<body>
+<div id="viewport"><main class="stage" id="stage"></main></div>
+<script src="assets/content.js"></script>
+<script src="assets/icons.js"></script>
+<script src="assets/deck.js"></script>
+<script>
+(function () {
+  var Y = C.years, S = [], css = '', K = '#1d1d1f', G = '#7c7c80', T = '#00a19a', O = '#f28c28', P = '#7b3fa0';
+  var LINES = [{ c: T, n: 'Team line', s: C.team, p: C.pillars[0] }, { c: O, n: 'Segment line', s: C.segment, p: C.pillars[1] }, { c: P, n: 'Channel line', s: C.channels, p: C.pillars[2] }];
+  function sl(h, cls) { S.push('<section class="slide ' + (cls || '') + '">' + h + '</section>'); }
+  function hd(b, c, sm, h) { return '<div class="hd"><div class="bul" style="background:' + c + '">' + b + '</div><div><small>' + sm + '</small><h2>' + h + '</h2></div></div>'; }
+  function st(x, y, r, w) { return '<circle cx="' + x + '" cy="' + y + '" r="' + (r || 9) + '" fill="#fff" stroke="' + K + '" stroke-width="' + (w || 4) + '"/>'; }
+
+  /* 1 cover */
+  var cm = '<path d="M-20 160H330C410 160 430 360 520 360H720" stroke="' + T + '" stroke-width="22" fill="none" stroke-linecap="round"/>' +
+    '<path d="M-20 380H720" stroke="' + O + '" stroke-width="22" fill="none"/>' +
+    '<path d="M-20 600H330C410 600 430 400 520 400H720" stroke="' + P + '" stroke-width="22" fill="none"/>';
+  [[90, 160], [210, 160], [90, 380], [230, 380], [90, 600], [210, 600]].forEach(function (q) { cm += st(q[0], q[1], 13, 6); });
+  cm += '<rect x="500" y="320" width="120" height="120" rx="60" fill="#fff" stroke="' + K + '" stroke-width="8"/><text x="560" y="388" text-anchor="middle" font-size="18" font-weight="800" fill="' + K + '" font-family="Manrope">' + Y[1] + '</text>';
+  sl('<div class="cv"><div class="hd" style="position:static"><div class="bul" style="background:' + K + '">M</div><div><small>' + C.org + '</small></div></div><h1>The route<br>we took this year</h1><p>Three lines, nineteen stations, one destination.</p>' +
+    '<div class="ln">' + LINES.map(function (l) { return '<span><i style="background:' + l.c + '"></i>' + l.p.s + '</span>'; }).join('') + '</div></div><svg class="cvmap" viewBox="0 0 700 720">' + cm + '</svg>');
+
+  /* 2 network map */
+  var m = '', lab = '';
+  m += '<path d="M40 60H620L812 252H930" stroke="' + T + '" stroke-width="14" fill="none" stroke-linejoin="round"/>';
+  m += '<path d="M40 260H930" stroke="' + O + '" stroke-width="14" fill="none"/>';
+  m += '<path d="M40 460H620L812 268H930" stroke="' + P + '" stroke-width="14" fill="none" stroke-linejoin="round"/>';
+  m += '<path d="M930 260H1120" stroke="' + K + '" stroke-width="22" fill="none" stroke-linecap="round"/>';
+  C.team.forEach(function (p, i) { var x = 80 + i * 100; m += st(x, 60); lab += '<text x="' + x + '" y="34" text-anchor="middle" font-size="14" font-weight="700" fill="' + K + '">' + p.k + '</text>'; });
+  C.segment.forEach(function (p, i) { var x = 100 + i * 128; m += st(x, 260); lab += '<text x="' + x + '" y="296" text-anchor="middle" font-size="14" font-weight="700" fill="' + K + '">' + p.k + '</text>'; });
+  C.channels.forEach(function (p, i) { var x = 76 + i * 90; m += st(x, 460); lab += '<text x="' + x + '" y="' + (i % 2 ? 438 : 496) + '" text-anchor="middle" font-size="14" font-weight="700" fill="' + K + '">' + p.k + '</text>'; });
+  m += '<rect x="900" y="222" width="76" height="76" rx="38" fill="#fff" stroke="' + K + '" stroke-width="7"/><circle cx="1120" cy="260" r="26" fill="#fff" stroke="' + K + '" stroke-width="7"/>';
+  lab += '<text x="938" y="330" text-anchor="middle" font-size="15" font-weight="800" fill="' + K + '">Interchange</text><text x="1120" y="318" text-anchor="middle" font-size="15" font-weight="800" fill="' + K + '">' + Y[1] + '</text><text x="1120" y="338" text-anchor="middle" font-size="14" font-weight="600" fill="' + G + '">Results</text>';
+  lab += '<text x="40" y="104" font-size="13" font-weight="800" fill="' + T + '" letter-spacing="1.5">TEAM LINE</text><text x="40" y="232" font-size="13" font-weight="800" fill="' + O + '" letter-spacing="1.5">SEGMENT LINE</text><text x="40" y="432" font-size="13" font-weight="800" fill="' + P + '" letter-spacing="1.5">CHANNEL LINE</text>';
+  sl(hd('M', K, 'Network map', 'Three lines, <span style="color:' + O + '">one destination</span>') + '<svg class="map" viewBox="0 0 1180 500">' + m + lab + '</svg>');
+
+  /* 3-5 line rides */
+  LINES.forEach(function (L, li) {
+    var n = L.s.length, x0 = 150, x1 = 1130, step = (x1 - x0) / (n - 1), cls = 'ride' + li, h = '';
+    h += '<div class="rail" style="background:' + L.c + '"></div>';
+    L.s.forEach(function (p, i) {
+      var x = Math.round(x0 + i * step);
+      h += '<div class="stn" data-at="' + i + '" data-go="' + i + '" style="left:' + x + 'px"></div><div class="sn" data-at="' + i + '" style="left:' + x + 'px">' + p.k + '</div>';
+      css += '.' + cls + '[data-step="' + i + '"] .train{left:' + x + 'px}';
+    });
+    h += '<div class="train">STOP</div><div class="sign">' + L.s.map(function (p, i) {
+      return '<div data-at="' + i + '">' + I(p.i) + '<div><small>' + L.n + ' · stop ' + (i + 1) + ' of ' + n + '</small><b>' + p.t + '</b><p>' + p.l + '</p></div></div>';
+    }).join('') + '</div>';
+    sl('<div style="--lc:' + L.c + '" class="ride">' + hd(li + 1, L.c, L.n, L.p.n) + h + '</div>', cls);
+  });
+  css += '.train{left:150px}';
+
+  /* 6 arrival: market */
+  var mk = Deck.slope(C.market, { w: 760, h: 480, x1: 170, x2: 590, years: Y, ink: K, sub: G, axis: K, fs: 18, font: 'Manrope', hi: 1, r: 9, gap: 24,
+    color: function (d, i) { return i === 1 ? O : i === 0 ? T : '#b9b8b2'; }, width: function (d, i) { return i < 2 ? 12 : 6; } });
+  sl(hd('★', O, 'Arrival', 'Where the route <span style="color:' + O + '">took us</span>') + '<div class="mk">' + mk + '</div>' +
+    '<div class="side"><div class="bul">B</div><p>B arrived first: from 8 to 14, overtaking A.</p><small>Market comparison, ' + Y[0] + ' to ' + Y[1] + '</small></div>');
+
+  /* 7 departure board: growth */
+  var rows = '<div class="r h"><span>PLAT.</span><span>LINE</span><span>GROWTH</span><span style="text-align:right">CHANGE</span></div>';
+  C.growth.forEach(function (d, i) { var b = ''; for (var k = 0; k < d[1]; k++) b += '<i></i>'; rows += '<div class="r"><span class="pl">' + (i + 1) + '</span><span>' + d[0] + '</span><span class="bk">' + b + '</span><span class="v">+' + d[1] + '%</span></div>'; });
+  sl(hd('▤', K, 'Departures', 'Every line <span style="color:' + O + '">left the station higher</span>') + '<div class="note">' + C.growthNote + '</div><div class="board">' + rows + '</div>');
+
+  /* 8 ticket */
+  sl('<div class="tk"><div class="l"><small>End of the line</small><h1>Thank you</h1><p>This journey was built by the whole team.</p><div class="bars"><i style="background:' + T + '"></i><i style="background:' + O + '"></i><i style="background:' + P + '"></i></div></div>' +
+    '<div class="r"><small>VALID FOR</small><div>' + C.credits.join('<br>') + '</div><small>ROUTE</small><div>' + Y[0] + ' → ' + Y[1] + '</div></div></div>');
+
+  document.head.insertAdjacentHTML('beforeend', '<style>' + css + '</style>');
+  Deck.render(S);
+})();
+</script>
+</body>
+</html>

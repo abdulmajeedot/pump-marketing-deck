@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>06 · Cinematic</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/deck.css">
+<style>
+:root{--bg:#08080d;--fg:#f4f2ff;--mut:rgba(244,242,255,.6);--m:#ff4d8d;--v:#7c5cff;--a:#ffb547;--c:#4de1ff}
+.slide{background:var(--bg);color:var(--fg);font-family:'Bricolage Grotesque',sans-serif}
+.slide::before,.slide::after{content:"";position:absolute;left:0;right:0;height:34px;background:#000;z-index:5}
+.slide::before{top:0}.slide::after{bottom:0}
+.glow{position:absolute;inset:0;background:radial-gradient(700px 480px at var(--gx,50%) var(--gy,55%),color-mix(in srgb,var(--g1,#7c5cff) 34%,transparent),transparent 70%),radial-gradient(600px 400px at 85% 15%,color-mix(in srgb,var(--g2,#ff4d8d) 18%,transparent),transparent 70%)}
+.grain{position:absolute;inset:0;opacity:.07;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:3px 3px}
+.lbl{font-size:15px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--mut)}
+.gt{background:linear-gradient(100deg,var(--g1,#7c5cff),var(--g2,#ff4d8d));-webkit-background-clip:text;background-clip:text;color:transparent}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes rise{from{opacity:0;transform:translateY(24px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+
+/* 1 title card */
+.tc{position:absolute;left:0;right:0;top:200px;text-align:center;z-index:2}
+.tc h1{font-size:118px;line-height:.95;font-weight:800;letter-spacing:-.04em;font-variation-settings:"opsz" 96}
+.tc p{font-size:24px;color:var(--mut);margin-top:26px}
+.ring{position:absolute;left:340px;top:60px;width:600px;height:600px;opacity:.55}
+.ring g{transform-origin:300px 300px;animation:spin 60s linear infinite}
+
+/* acts */
+.act-top{position:absolute;left:0;right:0;top:66px;text-align:center;z-index:2}
+.act-top b{display:block;font-size:22px;font-weight:600;margin-top:8px}
+.beat{position:absolute;left:100px;right:100px;top:150px;height:440px;text-align:center;z-index:2}
+.beat>div{position:absolute;inset:0;opacity:0;pointer-events:none}
+.beat>div.now{opacity:1;animation:rise .7s ease both}
+.beat .ic{width:110px;height:110px;margin:10px auto 26px;color:var(--g1);--isw:1.8;--ia:color-mix(in srgb,var(--g1) 25%,transparent);filter:drop-shadow(0 0 18px var(--g1))}
+.beat .k{font-size:150px;line-height:.92;font-weight:800;letter-spacing:-.05em;padding-bottom:10px}
+.beat .t{font-size:30px;font-weight:600;margin-top:18px}
+.beat .l{font-size:22px;color:var(--mut);margin-top:10px}
+.dots{position:absolute;left:0;right:0;bottom:66px;display:flex;justify-content:center;gap:10px;z-index:2}
+.dots i{width:40px;height:5px;border-radius:3px;background:rgba(255,255,255,.16);cursor:pointer;transition:background .4s}
+.dots i.in{background:var(--g1)}
+.dots i.now{background:var(--fg)}
+
+/* prologue, epilogue */
+.side{position:absolute;left:84px;top:150px;width:360px;z-index:2}
+.side h2{font-size:64px;line-height:1;font-weight:800;letter-spacing:-.04em;margin:16px 0 20px}
+.side p{font-size:21px;color:var(--mut);line-height:1.45}
+.side small{display:block;margin-top:20px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--a)}
+.ch{position:absolute;left:470px;top:110px;width:740px;height:500px;z-index:2}
+.ch .yr{font-size:14px;font-weight:600;letter-spacing:.24em}
+.ch text{font-family:'Bricolage Grotesque'}
+
+/* credits */
+.cr{position:absolute;left:0;right:0;top:110px;text-align:center;z-index:2}
+.cr .row{display:grid;grid-template-columns:1fr 1fr;gap:30px;font-size:24px;margin:14px 0}
+.cr .row span:first-child{text-align:right;color:var(--mut);font-size:16px;letter-spacing:.3em;text-transform:uppercase;padding-top:6px}
+.cr .row span:last-child{text-align:left;font-weight:700}
+.cr h1{font-size:110px;font-weight:800;letter-spacing:-.04em;margin-top:38px}
+</style>
+</head>
+<body>
+<div id="viewport"><main class="stage" id="stage"></main></div>
+<script src="assets/content.js"></script>
+<script src="assets/icons.js"></script>
+<script src="assets/deck.js"></script>
+<script>
+(function () {
+  var Y = C.years, S = [];
+  var M = '#ff4d8d', V = '#7c5cff', A = '#ffb547', CY = '#4de1ff';
+  Deck.defs('<filter id="cnG" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
+    '<linearGradient id="cnL" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="' + V + '"/><stop offset="1" stop-color="' + M + '"/></linearGradient>');
+  function sl(vars, h) { S.push('<section class="slide" style="' + vars + '"><div class="glow"></div><div class="grain"></div>' + h + '</section>'); }
+
+  /* 1 title card */
+  var vanes = ''; for (var i = 0; i < 8; i++) vanes += '<path d="M300 300C330 220 420 170 520 190" fill="none" stroke="url(#cnL)" stroke-width="6" stroke-linecap="round" transform="rotate(' + i * 45 + ' 300 300)"/>';
+  sl('--g1:' + V + ';--g2:' + M + ';--gy:50%', '<svg class="ring" viewBox="0 0 600 600"><g filter="url(#cnG)"><circle cx="300" cy="300" r="270" fill="none" stroke="url(#cnL)" stroke-width="2" stroke-opacity=".6"/>' + vanes + '</g></svg>' +
+    '<div class="tc"><div class="lbl">' + C.org + ' presents</div><h1 style="margin-top:22px">How we built<br><span class="gt">this year</span></h1><p>A story in three acts</p></div>');
+
+  /* 2 prologue: market */
+  var cols = [V, M, '#3a3a52', CY, '#4a4a66', '#5c5c78'];
+  sl('--g1:' + M + ';--g2:' + V + ';--gx:70%;--gy:60%', '<div class="side"><div class="lbl">Prologue</div><h2>Where we <span class="gt">stood</span></h2><p>B moved from second to first, from 8 to 14. A fell from 10 to 6.</p><small>' + Y[0] + ' → ' + Y[1] + '</small></div>' +
+    '<div class="ch">' + Deck.sankey(C.market.map(function (d, i) { return [d[0], d[1], d[2], cols[i]]; }), { w: 740, h: 500, xl: 70, xr: 620, rank: true, years: Y, ink: '#f4f2ff', sub: 'rgba(244,242,255,.55)', node: '#f4f2ff', fs: 19, font: 'Bricolage Grotesque', op: .92 }) + '</div>');
+
+  /* 3-5 acts */
+  var acts = [['I', C.team, C.pillars[0], V, M], ['II', C.segment, C.pillars[1], A, M], ['III', C.channels, C.pillars[2], CY, V]];
+  acts.forEach(function (a) {
+    sl('--g1:' + a[3] + ';--g2:' + a[4], '<div class="act-top"><div class="lbl">Act ' + a[0] + '</div><b>' + a[2].n + '</b></div>' +
+      '<div class="beat">' + a[1].map(function (p, i) { return '<div data-at="' + i + '">' + I(p.i) + '<div class="k gt">' + p.k + '</div><div class="t">' + p.t + '</div><div class="l">' + p.l + '</div></div>'; }).join('') + '</div>' +
+      '<div class="dots">' + a[1].map(function (p, i) { return '<i data-at="' + i + '" data-go="' + i + '"></i>'; }).join('') + '</div>');
+  });
+
+  /* 6 epilogue: radial growth */
+  var cx = 390, cy = 260, rc = '';
+  C.growth.forEach(function (d, i) {
+    var r = 236 - i * 22, ang = -90 + 270 * d[1] / 20, rad = ang * Math.PI / 180, x = cx + r * Math.cos(rad), y = cy + r * Math.sin(rad), big = 270 * d[1] / 20 > 180 ? 1 : 0;
+    var c = i < 3 ? M : i < 7 ? V : CY;
+    rc += '<path d="M' + cx + ' ' + (cy - r) + 'A' + r + ' ' + r + ' 0 1 1 ' + (cx - r) + ' ' + cy + '" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="14" stroke-linecap="round"/>' +
+      '<path d="M' + cx + ' ' + (cy - r) + 'A' + r + ' ' + r + ' 0 ' + big + ' 1 ' + x.toFixed(1) + ' ' + y.toFixed(1) + '" fill="none" stroke="' + c + '" stroke-width="14" stroke-linecap="round" filter="url(#cnG)"/>' +
+      '<text x="' + (cx - 14) + '" y="' + (cy - r + 5) + '" text-anchor="end" font-size="14.5" fill="#f4f2ff">' + d[0] + ' <tspan font-weight="800" fill="' + c + '">+' + d[1] + '%</tspan></text>';
+  });
+  sl('--g1:' + V + ';--g2:' + CY + ';--gx:65%', '<div class="side"><div class="lbl">Epilogue</div><h2>Every line <span class="gt">grew</span></h2><p>Ten lines, all higher than last year. The longest arcs grew fastest.</p><small>' + C.growthNote + ' · replace with actuals</small></div>' +
+    '<div class="ch"><svg viewBox="0 0 740 500" style="width:100%;height:100%">' + rc + '</svg></div>');
+
+  /* 7 credits */
+  var roles = [['Starring', C.credits[0]], ['Story by', C.credits[1]], ['Engineering', C.credits[2]], ['Support', C.credits[3]], ['Distribution', C.credits[4]]];
+  sl('--g1:' + M + ';--g2:' + A + ';--gy:85%', '<div class="cr"><div class="lbl" style="margin-bottom:24px">Credits</div>' + roles.map(function (r) { return '<div class="row"><span>' + r[0] + '</span><span>' + r[1] + '</span></div>'; }).join('') + '<h1 class="gt">Thank you</h1></div>');
+
+  Deck.render(S);
+})();
+</script>
+</body>
+</html>

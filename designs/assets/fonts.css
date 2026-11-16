@@ -1,0 +1,19 @@
+/* Fonts: Google Fonts (SIL Open Font License), latin subset, stored locally so the decks work offline */
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/SpaceGrotesk-normal-400_700.woff2) format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/JetBrainsMono-normal-400_700.woff2) format('woff2')}
+@font-face{font-family:'Outfit';font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/Outfit-normal-100_900.woff2) format('woff2')}
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:300 800;font-display:swap;src:url(fonts/Fraunces-normal-300_800.woff2) format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/Inter-normal-400_700.woff2) format('woff2')}
+@font-face{font-family:'Archivo';font-style:normal;font-weight:400 900;font-display:swap;src:url(fonts/Archivo-normal-400_900.woff2) format('woff2')}
+@font-face{font-family:'Manrope';font-style:normal;font-weight:400 800;font-display:swap;src:url(fonts/Manrope-normal-400_800.woff2) format('woff2')}
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:400 800;font-display:swap;src:url(fonts/BricolageGrotesque-normal-400_800.woff2) format('woff2')}
+@font-face{font-family:'Caveat';font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/Caveat-normal-400_700.woff2) format('woff2')}
+@font-face{font-family:'Kalam';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/Kalam-normal-400.woff2) format('woff2')}
+@font-face{font-family:'Kalam';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/Kalam-normal-700.woff2) format('woff2')}
+@font-face{font-family:'Lexend';font-style:normal;font-weight:300 700;font-display:swap;src:url(fonts/Lexend-normal-300_700.woff2) format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/BarlowCondensed-normal-500.woff2) format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/BarlowCondensed-normal-700.woff2) format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:800;font-display:swap;src:url(fonts/BarlowCondensed-normal-800.woff2) format('woff2')}
+@font-face{font-family:'DM Serif Display';font-style:italic;font-weight:400;font-display:swap;src:url(fonts/DMSerifDisplay-italic-400.woff2) format('woff2')}
+@font-face{font-family:'DM Serif Display';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/DMSerifDisplay-normal-400.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/DMSans-normal-400_700.woff2) format('woff2')}
